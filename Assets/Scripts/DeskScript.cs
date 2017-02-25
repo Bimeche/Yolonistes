@@ -18,7 +18,7 @@ public class DeskScript : MonoBehaviour
 	public Image initiateJudgingDisp;
 	public Image judgingPanelDisp;
 	public Image backToMainSheetPanel;
-    public CurrentFloder currentF;
+    CurrentFloder currentF;
 	private CanvasGroup currentDocDisplayed;
 	private string spriteName;
 	private CharacterInfos[] daysFilesList;
@@ -32,11 +32,14 @@ public class DeskScript : MonoBehaviour
     int numberOfFolder;
     public Text nbFolderText;
 
+    
     // Use this for initialization
     void Start()
 	{
+        currentF = GameObject.Find("CurrentFolder").GetComponent<CurrentFloder>();
         numberOfFolder = 2;
         nbFolderText.text = numberOfFolder.ToString();
+        
         isZoomed = false;
 		index = 0;
         btList = new List<Button>();

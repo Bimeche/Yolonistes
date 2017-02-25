@@ -7,11 +7,9 @@ public class CurrentFloder : MonoBehaviour {
     CharacterInfos current;
     int index = 1;
     public GameObject g;
+    
 	// Use this for initialization
 	void Start () {
-       // Files = new FileReader();
-       current = Files.listCharacters[index];
-
     }
     void Awake()
     {
@@ -28,11 +26,13 @@ public class CurrentFloder : MonoBehaviour {
 
     public CharacterInfos GetCurrent()
     {
+        current = Files.listCharacters[index];
         return current;
     }
     public void NextFile()
     {
         index++;
+        Debug.Log("Count " + Files.listCharacters.Count + " index " +index);
         current = Files.listCharacters[index];
     }
 

@@ -23,7 +23,6 @@ public class FileReader : MonoBehaviour {
             CreateCharacter();
             text = reader.ReadLine();
         }
-
         
         Debug.Log(listCharacters.Count);
         
