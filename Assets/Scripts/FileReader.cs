@@ -4,7 +4,7 @@ using System.IO;
 using UnityEngine;
 
 public class FileReader : MonoBehaviour {
-    public List<CharacterInfo> listCharacters = new List<CharacterInfo>();
+    public List<CharacterInfos> listCharacters = new List<CharacterInfos>();
 
     protected FileInfo theSourceFile = null;
     protected StreamReader reader = null;
@@ -23,15 +23,20 @@ public class FileReader : MonoBehaviour {
             text = reader.ReadLine();
         }
 
-        foreach(CharacterInfo i in listCharacters)
+        foreach (CharacterInfos i in listCharacters)
         {
-            Debug.Log(i.guilty + " " + i.number + " " + i.age + " " + i.genre + " " + i.emploi + " " + i.hobbies + " " + i.notable + " " + i.finance.dette + " " + i.finance.infraction
-                + " " + i.crime.crime + " " + i.medical.psychologique + " " + i.medical.condition + " " + i.politique.religion + " " + i.politique.engagement +"\n");
+
+            Debug.Log(i.guilty + " " + i.number + " " + i.age + " " + i.genre + " " + i.emploi + " " + i.hobbies + " " + i.notable + " "
+                + i.finance.dette + " " + i.finance.impots + " " + i.finance.solde
+                + " " + i.crime.atteintePersonnelle + " " + i.crime.atteinteGouvernement + " "+ i.crime.atteinteMaterielle + " "
+                + i.medical.psychologique + " " + i.medical.maladie + " " +   i.medical.hospitalisation + " "
+                + i.politique.religion + " " + i.politique.engagement + "\n");
         }
     }
 
     public void CreateCharacter()
     {
+
         bool guilt = false;
         string num;
         int a;
@@ -40,11 +45,19 @@ public class FileReader : MonoBehaviour {
         string mar;
         string hob;
         string not = "";
+
         string d = "";
-        string inf = "";
-        string c = "";
+        string imp = "";
+        string s = "";
+
+        string p = "";
+        string g = "";
+        string m = "";
+
         string psy = "";
-        string con = "";
+        string mal = "";
+        string hos = "";
+
         string rel = " ";
         string eng = "";
 
@@ -70,6 +83,7 @@ public class FileReader : MonoBehaviour {
             not = text;
         }
         text = reader.ReadLine();
+
         if (!text.Equals("0"))
         {
             d = text;
@@ -77,15 +91,30 @@ public class FileReader : MonoBehaviour {
         text = reader.ReadLine();
         if (!text.Equals("0"))
         {
-            inf = text;
+            imp = text;
+        }
+        text = reader.ReadLine(); if (!text.Equals("0"))
+        {
+            s = text;
+        }
+        text = reader.ReadLine();
+
+        if (!text.Equals("0"))
+        {
+            p = text;
         }
         text = reader.ReadLine();
         if (!text.Equals("0"))
-
         {
-            c = text;
+            g = text;
         }
         text = reader.ReadLine();
+        if (!text.Equals("0"))
+        {
+            m = text;
+        }
+        text = reader.ReadLine();
+
         if (!text.Equals("0"))
         {
             psy = text;
@@ -93,9 +122,15 @@ public class FileReader : MonoBehaviour {
         text = reader.ReadLine();
         if (!text.Equals("0"))
         {
-            con = text;
+            mal = text;
         }
         text = reader.ReadLine();
+        if (!text.Equals("0"))
+        {
+            hos = text;
+        }
+        text = reader.ReadLine();
+
         if (!text.Equals("0"))
         {
             rel = text;
@@ -106,7 +141,7 @@ public class FileReader : MonoBehaviour {
             eng = text;
         }
 
-        listCharacters.Add(new CharacterInfo(guilt, num, a, gen, emp, mar, hob, not, d, inf, c, psy, con, rel, eng));
+        listCharacters.Add(new CharacterInfos(guilt, num, a, gen, emp, mar, hob, not, d, imp, s, p, g, m, psy, mal, hos, rel, eng));
     }
 
     void Update()

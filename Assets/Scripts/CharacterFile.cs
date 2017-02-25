@@ -5,34 +5,42 @@ using UnityEngine;
 public class InfoFinancier
 {
     public string dette;
-    public string infraction;
+    public string impots;
+    public string solde;
 
-    public InfoFinancier(string d, string inf)
+    public InfoFinancier(string d, string imp, string s)
     {
         dette = d;
-        infraction = inf;
+        impots = imp;
+        solde = s;
     }
 }
 
 public class InfoCriminel
 {
-    public string crime;
+    public string atteintePersonnelle;
+    public string atteinteGouvernement;
+    public string atteinteMaterielle;
 
-    public InfoCriminel(string c)
+    public InfoCriminel(string p, string g, string m)
     {
-        crime = c;
+        atteintePersonnelle = p;
+        atteinteGouvernement = g;
+        atteinteMaterielle = m;
     }
 }
 
 public class InfoMedical
 {
     public string psychologique;
-    public string condition;
+    public string maladie;
+    public string hospitalisation;
 
-    public InfoMedical(string psy, string con)
+    public InfoMedical(string psy, string mal, string hos)
     {
         psychologique = psy;
-        condition = con;
+        maladie = mal;
+        hospitalisation = hos;
     }
 }
 
@@ -48,7 +56,7 @@ public class InfoPolitique
     }
 }
 
-public class CharacterInfo
+public class CharacterInfos
 {
     public bool guilty;
     public string number;
@@ -64,9 +72,9 @@ public class CharacterInfo
     public InfoMedical medical;
     public InfoPolitique politique;
 
-    public CharacterInfo(bool g, string num, int a, string gen, string emp, string hob, string mar, string not, string d, string inf, string c, string psy, string con, string rel, string eng)
+    public CharacterInfos(bool guilt, string num, int a, string gen, string emp, string mar, string hob, string not, string d, string imp, string s, string p, string g, string m, string psy, string mal, string hos, string rel, string eng)
     {
-        guilty = g;
+        guilty = guilt;
         number = num;
         age = a;
         genre = gen;
@@ -75,9 +83,9 @@ public class CharacterInfo
         hobbies = hob;
         notable = not;
 
-        crime = new InfoCriminel(c);
-        finance = new InfoFinancier(d, inf);
-        medical = new InfoMedical(psy, con);
+        crime = new InfoCriminel(p, g, m);
+        finance = new InfoFinancier(d, imp, s);
+        medical = new InfoMedical(psy, mal, hos);
         politique = new InfoPolitique(rel, eng);
     }
 
