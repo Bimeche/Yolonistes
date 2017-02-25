@@ -14,13 +14,8 @@ public class RendererSortingLayer : MonoBehaviour {
     // Use this for initialization
     void Start()
     {
-        Transform parent = transform.parent;
+        
+        this.gameObject.GetComponent<MeshRenderer>().sortingOrder = 50;
 
-        Renderer parentRenderer = parent.GetComponent<Renderer>();
-        Renderer renderer = GetComponent<Renderer>();
-        renderer.sortingLayerID = parentRenderer.sortingLayerID;
-        renderer.sortingOrder = parentRenderer.sortingOrder;
-
-       
     }
 }
