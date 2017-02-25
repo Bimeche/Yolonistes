@@ -26,14 +26,28 @@ public class DeskScript : MonoBehaviour
     bool hasCrime = false;
     bool hasFinance = false;
     bool hasMed = false;
-
+    List<Button> btList;
 
     // Use this for initialization
     void Start()
 	{
 		isZoomed = false;
 		index = 0;
-	}
+        btList = new List<Button>();
+        foreach (Button b in medDocsDisp.GetComponentsInChildren<Button>())
+        {
+            btList.Add(b);
+        }
+        foreach (Button b in crimeDocsDisp.GetComponentsInChildren<Button>())
+        {
+            btList.Add(b);
+        }
+        foreach (Button b in moneyDocsDisp.GetComponentsInChildren<Button>())
+        {
+            btList.Add(b);
+        }
+
+    }
 	// Update is called once per frame
 	void Update()
 	{
@@ -71,12 +85,18 @@ public class DeskScript : MonoBehaviour
                 if (b.name=="MedPage1")
                     if(currentF.GetCurrent().medical.hospitalisation.Equals(""))
                         b.gameObject.SetActive ( false);
-                if (b.name == "MedPage2")
+                    else
+                        b.gameObject.SetActive(true);
+               else if (b.name == "MedPage2")
                     if (currentF.GetCurrent().medical.maladie.Equals(""))
                         b.gameObject.SetActive(false);
-                if (b.name == "MedPage3")
+                    else
+                        b.gameObject.SetActive(true);
+               else if (b.name == "MedPage3")
                     if (currentF.GetCurrent().medical.psychologique.Equals(""))
                         b.gameObject.SetActive(false);
+                    else
+                        b.gameObject.SetActive(true);
             }
             hasMed = true;
             t.ChangeTime(2, 27);
@@ -99,12 +119,18 @@ public class DeskScript : MonoBehaviour
                 if (b.name == "CrimePage1")
                     if (currentF.GetCurrent().crime.atteinteGouvernement.Equals(""))
                         b.gameObject.SetActive(false);
-                if (b.name == "CrimePage2")
+                    else
+                        b.gameObject.SetActive(true);
+                else if (b.name == "CrimePage2")
                     if (currentF.GetCurrent().crime.atteinteMaterielle.Equals(""))
                         b.gameObject.SetActive(false);
-                if (b.name == "CrimePage3")
+                    else
+                        b.gameObject.SetActive(true);
+                else if (b.name == "CrimePage3")
                     if (currentF.GetCurrent().crime.atteintePersonnelle.Equals(""))
                         b.gameObject.SetActive(false);
+                    else
+                        b.gameObject.SetActive(true);
             }
             hasCrime = true;
             t.ChangeTime(1, 42);
@@ -119,19 +145,26 @@ public class DeskScript : MonoBehaviour
             Debug.Log("MoneyDocs");
 		    moneyDocsDisp.GetComponent<CanvasGroup>().alpha = 1;
 		    moneyDocsDisp.GetComponent<CanvasGroup>().blocksRaycasts = true;
-
+            Debug.Log(moneyDocsDisp.GetComponentsInChildren<Button>().Length);
             foreach (Button b in moneyDocsDisp.GetComponentsInChildren<Button>())
             {
                 Debug.Log(b.name);
                 if (b.name == "MoneyPage1")
                     if (currentF.GetCurrent().finance.dette.Equals(""))
                         b.gameObject.SetActive(false);
-                if (b.name == "MoneyPage2")
+                    else
+                        b.gameObject.SetActive(true);
+                else if (b.name == "MoneyPage2")
                     if (currentF.GetCurrent().finance.impots.Equals(""))
                         b.gameObject.SetActive(false);
-                if (b.name == "MoneyPage3")
+                    else
+                        b.gameObject.SetActive(true);
+
+                else if (b.name == "MoneyPage3")
                     if (currentF.GetCurrent().finance.solde.Equals(""))
                         b.gameObject.SetActive(false);
+                    else
+                        b.gameObject.SetActive(true);
             }
             hasFinance = true;
             t.ChangeTime(3, 19);
@@ -174,15 +207,19 @@ public class DeskScript : MonoBehaviour
 
 		if(buttonClicked.name == "Innocent")
 		{
-			Debug.Log("Innocent");
-		}
+            cleanFiles();
+            Debug.Log("Innocent");
+            
+        }
 		else if(buttonClicked.name == "Investigate")
 		{
-			Debug.Log("Investigate");
+            cleanFiles();
+            Debug.Log("Investigate");
 		}
 		else
 		{
-			Debug.Log("Guilty");
+            cleanFiles();
+            Debug.Log("Guilty");
 		}
 	}
 
@@ -219,4 +256,40 @@ public class DeskScript : MonoBehaviour
 		backToMainSheetPanel.GetComponent<CanvasGroup>().alpha = 1;
 		backToMainSheetPanel.GetComponent<CanvasGroup>().blocksRaycasts = true;
 	}
+
+    void cleanFiles()
+    {
+        hasCrime = false;
+        hasFinance = false;
+        hasMed = false;
+        isJudging = false;
+        judgingPanelDisp.GetComponent<CanvasGroup>().alpha = 0;
+        judgingPanelDisp.GetComponent<CanvasGroup>().blocksRaycasts = false;
+        backToMainSheetPanel.GetComponent<CanvasGroup>().alpha = 0;
+        backToMainSheetPanel.GetComponent<CanvasGroup>().blocksRaycasts = false;
+        currentDocDisplayed.alpha = 0;
+        currentDocDisplayed.blocksRaycasts = false;
+        profileDisp.GetComponent<CanvasGroup>().alpha = 0;
+        profileDisp.GetComponent<CanvasGroup>().blocksRaycasts = false;
+        isZoomed = false;
+        index = 0;
+        archivesButtonsDisp.GetComponent<CanvasGroup>().alpha = 0;
+        archivesButtonsDisp.GetComponent<CanvasGroup>().blocksRaycasts = false;
+        initiateJudgingDisp.GetComponent<CanvasGroup>().alpha = 0;
+        initiateJudgingDisp.GetComponent<CanvasGroup>().blocksRaycasts = false;
+
+        moneyDocsDisp.GetComponent<CanvasGroup>().alpha = 0;
+        moneyDocsDisp.GetComponent<CanvasGroup>().blocksRaycasts = false;
+        crimeDocsDisp.GetComponent<CanvasGroup>().alpha = 0;
+        crimeDocsDisp.GetComponent<CanvasGroup>().blocksRaycasts = false;
+        medDocsDisp.GetComponent<CanvasGroup>().alpha = 0;
+        medDocsDisp.GetComponent<CanvasGroup>().blocksRaycasts = false;
+        currentDocDisplayed.alpha = 1;
+        currentDocDisplayed.blocksRaycasts = true;
+        foreach (Button b in btList)
+        {
+            b.gameObject.SetActive(true);
+        }
+        
+    }
 }

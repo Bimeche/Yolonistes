@@ -9,7 +9,7 @@ public class CurrentFloder : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
        // Files = new FileReader();
-       current = Files.listCharacters[0];
+       current = Files.listCharacters[1];
 	}
 	
 	// Update is called once per frame
@@ -20,6 +20,11 @@ public class CurrentFloder : MonoBehaviour {
     public CharacterInfos GetCurrent()
     {
         return current;
+    }
+    public void NextFile()
+    {
+        index++;
+        current = Files.listCharacters[index];
     }
 
 }
