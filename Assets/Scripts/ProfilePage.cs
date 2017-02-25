@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using UnityEditor;
+using UnityEngine;
 
 public class ProfilePage : MonoBehaviour {
 	private SpriteRenderer rend;
@@ -7,7 +8,8 @@ public class ProfilePage : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
 		rend = GetComponent<SpriteRenderer>();
-		rend.enabled = false;
+		Sprite sprite = AssetDatabase.LoadAssetAtPath<Sprite>("Assets/Sprites/TestSprite.png");
+		rend.sprite = sprite;
 		isZoomed = false;
 	}
 	

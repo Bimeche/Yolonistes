@@ -4,13 +4,11 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class PageScript : MonoBehaviour {
-	private SpriteRenderer rend;
 	private bool isZoomed;
+	public Transform profilePagePrefab;
 
 	// Use this for initialization
 	void Start () {
-		rend = GetComponent<SpriteRenderer>();
-		rend.enabled = true;
 		isZoomed = false;
 	}
 	// Update is called once per frame
@@ -19,13 +17,12 @@ public class PageScript : MonoBehaviour {
 	
 	public void ZoomIn()
 	{
-		isZoomed = true;
-		rend.enabled = false;
+		Vector3 profilePagePos = Camera.main.ScreenToWorldPoint(new Vector3(Screen.width / 2, Screen.height / 2 - 100, 9f));
+		Instantiate(profilePagePrefab, profilePagePos, Quaternion.identity, transform.parent);
 	}
 
 	public void ZoomOut()
 	{
 		isZoomed = false;
-		rend.enabled = true;
 	}
 }

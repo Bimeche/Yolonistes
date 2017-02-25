@@ -1,41 +1,87 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.EventSystems;
+using UnityEngine.UI;
 
 public class DeskScript : MonoBehaviour
 {
-	private PageScript page;
-	private ProfilePage profile;
+	private bool isZoomed;
+	public Transform profilePagePrefab;
+	public Image profileDisp;
+	public Image archivesButtonsDisp;
+	public Image medDocsDisp;
+	public Image crimeDocsDisp;
+	public Image moneyDocsDisp;
+	public Image initiateJudgingDisp;
+	public Image judgingPanelDisp;
+
 	// Use this for initialization
 	void Start()
 	{
-		page = GetComponentInChildren<PageScript>();
-		profile = GetComponentInChildren<ProfilePage>();
+		isZoomed = false;
 	}
+	// Update is called once per frame
 	void Update()
 	{
-		if (Input.GetMouseButtonDown(0))
-		{
-			CastRay();
-		}
 	}
 
-	void CastRay()
+	public void ZoomIn()
 	{
-		Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-		RaycastHit2D hit = Physics2D.Raycast(ray.origin, ray.direction, Mathf.Infinity);
-		switch (hit.collider.gameObject.name)
+		Debug.Log("button pressed");
+		profileDisp.GetComponent<CanvasGroup>().alpha = 1;
+		archivesButtonsDisp.GetComponent<CanvasGroup>().alpha = 1;
+		initiateJudgingDisp.GetComponent<CanvasGroup>().alpha = 1;
+	}
+
+	public void ZoomOut()
+	{
+		isZoomed = false;
+	}
+
+	public void MedDocs()
+	{
+		Debug.Log("MedDocs");
+		medDocsDisp.GetComponent<CanvasGroup>().alpha = 1;
+	}
+
+	public void CrimeDocs()
+	{
+		Debug.Log("CrimeDocs");
+		crimeDocsDisp.GetComponent<CanvasGroup>().alpha = 1;
+	}
+
+	public void MoneyDocs()
+	{
+		Debug.Log("MoneyDocs");
+		moneyDocsDisp.GetComponent<CanvasGroup>().alpha = 1;
+	}
+
+	public void InitiateJudging()
+	{
+		Debug.Log("Inititate Judging");
+		archivesButtonsDisp.GetComponent<CanvasGroup>().alpha = 0;
+		medDocsDisp.GetComponent<CanvasGroup>().alpha = 0;
+		crimeDocsDisp.GetComponent<CanvasGroup>().alpha = 0;
+		moneyDocsDisp.GetComponent<CanvasGroup>().alpha = 0;
+		judgingPanelDisp.GetComponent<CanvasGroup>().alpha = 1;
+	}
+
+	public void Judging()
+	{
+		GameObject buttonClicked = EventSystem.current.currentSelectedGameObject;
+
+		if(buttonClicked.name == "Innocent")
 		{
-			case "Page":
-				page.ZoomIn();
-				profile.ZoomIn();
-				break;
-			case "Background":
-				page.ZoomOut();
-				profile.ZoomOut();
-				break;
-			case "ProfilePage":
-				break;
+			Debug.Log("Innocent");
+		}
+		else if(buttonClicked.name == "Investigate")
+		{
+			Debug.Log("Investigate");
+		}
+		else
+		{
+			Debug.Log("Guilty");
 		}
 	}
 }
