@@ -19,6 +19,7 @@ public class DeskScript : MonoBehaviour
 	private CanvasGroup currentDocDisplayed;
 	private string spriteName;
 
+
 	// Use this for initialization
 	void Start()
 	{
@@ -52,6 +53,7 @@ public class DeskScript : MonoBehaviour
 		Debug.Log("MedDocs");
 		medDocsDisp.GetComponent<CanvasGroup>().alpha = 1;
 		medDocsDisp.GetComponent<CanvasGroup>().blocksRaycasts = true;
+
 	}
 
 	public void CrimeDocs()
@@ -71,25 +73,20 @@ public class DeskScript : MonoBehaviour
 	public void InitiateJudging()
 	{
 		Debug.Log("Inititate Judging");
-		// VERSION 1 : appuyer sur le bouton pour juger est DEFINITIF, il doit juger et on passe au dossier suivant
-		profileDisp.GetComponent<CanvasGroup>().alpha = 0;
-		profileDisp.GetComponent<CanvasGroup>().blocksRaycasts = false;
-		archivesButtonsDisp.GetComponent<CanvasGroup>().alpha = 0;
-		archivesButtonsDisp.GetComponent<CanvasGroup>().blocksRaycasts = false;
-		medDocsDisp.GetComponent<CanvasGroup>().alpha = 0;
-		medDocsDisp.GetComponent<CanvasGroup>().blocksRaycasts = false;
-		crimeDocsDisp.GetComponent<CanvasGroup>().alpha = 0;
-		crimeDocsDisp.GetComponent<CanvasGroup>().blocksRaycasts = false;
-		moneyDocsDisp.GetComponent<CanvasGroup>().alpha = 0;
-		moneyDocsDisp.GetComponent<CanvasGroup>().blocksRaycasts = false;
+
 		judgingPanelDisp.GetComponent<CanvasGroup>().alpha = 1;
 		judgingPanelDisp.GetComponent<CanvasGroup>().blocksRaycasts = true;
-		backToMainSheetPanel.GetComponent<CanvasGroup>().alpha = 0;
-		backToMainSheetPanel.GetComponent<CanvasGroup>().blocksRaycasts = false;
+		initiateJudgingDisp.GetComponent<CanvasGroup>().alpha = 0;
+		initiateJudgingDisp.GetComponent<CanvasGroup>().blocksRaycasts = false;
+	}
 
-		// VERSION 2 : En appuyant à nouveau sur le bouton pour juger, on revient sur les feuilles d'informations
-		//judgingPanelDisp.GetComponent<CanvasGroup>().alpha = 1;
-		//judgingPanelDisp.GetComponent<CanvasGroup>().blocksRaycasts = true;
+	public void AbortJudging()
+	{
+		Debug.Log("aborting");
+		judgingPanelDisp.GetComponent<CanvasGroup>().alpha = 0;
+		judgingPanelDisp.GetComponent<CanvasGroup>().blocksRaycasts = false;
+		initiateJudgingDisp.GetComponent<CanvasGroup>().alpha = 1;
+		initiateJudgingDisp.GetComponent<CanvasGroup>().blocksRaycasts = true;
 	}
 
 	public void Judging()
