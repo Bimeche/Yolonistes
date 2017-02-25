@@ -16,13 +16,23 @@ public class DeskScript : MonoBehaviour
 	public Image initiateJudgingDisp;
 	public Image judgingPanelDisp;
 	public Image backToMainSheetPanel;
+    public CurrentFloder currentF;
 	private CanvasGroup currentDocDisplayed;
 	private string spriteName;
+	private CharacterInfos[] daysFilesList;
+	private int index;
+    bool isJudging;
+    public Timer t;
+    bool hasCrime = false;
+    bool hasFinance = false;
+    bool hasMed = false;
 
-	// Use this for initialization
-	void Start()
+
+    // Use this for initialization
+    void Start()
 	{
 		isZoomed = false;
+		index = 0;
 	}
 	// Update is called once per frame
 	void Update()
@@ -49,47 +59,113 @@ public class DeskScript : MonoBehaviour
 
 	public void MedDocs()
 	{
-		Debug.Log("MedDocs");
-		medDocsDisp.GetComponent<CanvasGroup>().alpha = 1;
-		medDocsDisp.GetComponent<CanvasGroup>().blocksRaycasts = true;
-	}
+
+        if (!hasMed)
+        {
+            Debug.Log("MedDocs");
+		    medDocsDisp.GetComponent<CanvasGroup>().alpha = 1;
+		    medDocsDisp.GetComponent<CanvasGroup>().blocksRaycasts = true;
+            foreach (Button b in medDocsDisp.GetComponentsInChildren<Button>())
+            {
+                Debug.Log(b.name);
+                if (b.name=="MedPage1")
+                    if(currentF.GetCurrent().medical.hospitalisation.Equals(""))
+                        b.gameObject.SetActive ( false);
+                if (b.name == "MedPage2")
+                    if (currentF.GetCurrent().medical.maladie.Equals(""))
+                        b.gameObject.SetActive(false);
+                if (b.name == "MedPage3")
+                    if (currentF.GetCurrent().medical.psychologique.Equals(""))
+                        b.gameObject.SetActive(false);
+            }
+            hasMed = true;
+            t.ChangeTime(2, 27);
+        }
+       
+        
+    }
 
 	public void CrimeDocs()
 	{
-		Debug.Log("CrimeDocs");
-		crimeDocsDisp.GetComponent<CanvasGroup>().alpha = 1;
-		crimeDocsDisp.GetComponent<CanvasGroup>().blocksRaycasts = true;
-	}
+        if (!hasCrime)
+        {
+            Debug.Log("CrimeDocs");
+		    crimeDocsDisp.GetComponent<CanvasGroup>().alpha = 1;
+		    crimeDocsDisp.GetComponent<CanvasGroup>().blocksRaycasts = true;
+
+            foreach (Button b in crimeDocsDisp.GetComponentsInChildren<Button>())
+            {
+                Debug.Log(b.name);
+                if (b.name == "CrimePage1")
+                    if (currentF.GetCurrent().crime.atteinteGouvernement.Equals(""))
+                        b.gameObject.SetActive(false);
+                if (b.name == "CrimePage2")
+                    if (currentF.GetCurrent().crime.atteinteMaterielle.Equals(""))
+                        b.gameObject.SetActive(false);
+                if (b.name == "CrimePage3")
+                    if (currentF.GetCurrent().crime.atteintePersonnelle.Equals(""))
+                        b.gameObject.SetActive(false);
+            }
+            hasCrime = true;
+            t.ChangeTime(1, 42);
+        }
+		
+    }
 
 	public void MoneyDocs()
 	{
-		Debug.Log("MoneyDocs");
-		moneyDocsDisp.GetComponent<CanvasGroup>().alpha = 1;
-		moneyDocsDisp.GetComponent<CanvasGroup>().blocksRaycasts = true;
-	}
+        if (!hasFinance)
+        {
+            Debug.Log("MoneyDocs");
+		    moneyDocsDisp.GetComponent<CanvasGroup>().alpha = 1;
+		    moneyDocsDisp.GetComponent<CanvasGroup>().blocksRaycasts = true;
+
+            foreach (Button b in moneyDocsDisp.GetComponentsInChildren<Button>())
+            {
+                Debug.Log(b.name);
+                if (b.name == "MoneyPage1")
+                    if (currentF.GetCurrent().finance.dette.Equals(""))
+                        b.gameObject.SetActive(false);
+                if (b.name == "MoneyPage2")
+                    if (currentF.GetCurrent().finance.impots.Equals(""))
+                        b.gameObject.SetActive(false);
+                if (b.name == "MoneyPage3")
+                    if (currentF.GetCurrent().finance.solde.Equals(""))
+                        b.gameObject.SetActive(false);
+            }
+            hasFinance = true;
+            t.ChangeTime(3, 19);
+        }
+		
+    }
 
 	public void InitiateJudging()
 	{
-		Debug.Log("Inititate Judging");
-		// VERSION 1 : appuyer sur le bouton pour juger est DEFINITIF, il doit juger et on passe au dossier suivant
-		profileDisp.GetComponent<CanvasGroup>().alpha = 0;
-		profileDisp.GetComponent<CanvasGroup>().blocksRaycasts = false;
-		archivesButtonsDisp.GetComponent<CanvasGroup>().alpha = 0;
-		archivesButtonsDisp.GetComponent<CanvasGroup>().blocksRaycasts = false;
-		medDocsDisp.GetComponent<CanvasGroup>().alpha = 0;
-		medDocsDisp.GetComponent<CanvasGroup>().blocksRaycasts = false;
-		crimeDocsDisp.GetComponent<CanvasGroup>().alpha = 0;
-		crimeDocsDisp.GetComponent<CanvasGroup>().blocksRaycasts = false;
-		moneyDocsDisp.GetComponent<CanvasGroup>().alpha = 0;
-		moneyDocsDisp.GetComponent<CanvasGroup>().blocksRaycasts = false;
-		judgingPanelDisp.GetComponent<CanvasGroup>().alpha = 1;
-		judgingPanelDisp.GetComponent<CanvasGroup>().blocksRaycasts = true;
-		backToMainSheetPanel.GetComponent<CanvasGroup>().alpha = 0;
-		backToMainSheetPanel.GetComponent<CanvasGroup>().blocksRaycasts = false;
+        if (isJudging)
+        {
+            Debug.Log("aborting");
+            judgingPanelDisp.GetComponent<CanvasGroup>().alpha = 0;
+            judgingPanelDisp.GetComponent<CanvasGroup>().blocksRaycasts = false;
+            isJudging = false;
+        }
+        else
+        {
+            Debug.Log("Inititate Judging");
+              
+		    judgingPanelDisp.GetComponent<CanvasGroup>().alpha = 1;
+		    judgingPanelDisp.GetComponent<CanvasGroup>().blocksRaycasts = true;
+            isJudging = true;
+        }
+		
+	}
 
-		// VERSION 2 : En appuyant à nouveau sur le bouton pour juger, on revient sur les feuilles d'informations
-		//judgingPanelDisp.GetComponent<CanvasGroup>().alpha = 1;
-		//judgingPanelDisp.GetComponent<CanvasGroup>().blocksRaycasts = true;
+	public void AbortJudging()
+	{
+		Debug.Log("aborting");
+		judgingPanelDisp.GetComponent<CanvasGroup>().alpha = 0;
+		judgingPanelDisp.GetComponent<CanvasGroup>().blocksRaycasts = false;
+		initiateJudgingDisp.GetComponent<CanvasGroup>().alpha = 1;
+		initiateJudgingDisp.GetComponent<CanvasGroup>().blocksRaycasts = true;
 	}
 
 	public void Judging()
