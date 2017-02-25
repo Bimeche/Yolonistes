@@ -28,6 +28,7 @@ public class DeskScript : MonoBehaviour
     bool hasCrime = false;
     bool hasFinance = false;
     bool hasMed = false;
+    bool hasAFolder = false;
     List<Button> btList;
     int numberOfFolder;
     public Text nbFolderText;
@@ -64,17 +65,22 @@ public class DeskScript : MonoBehaviour
 
 	public void ZoomIn()
 	{
-        numberOfFolder--;
-        nbFolderText.text = numberOfFolder.ToString();
-        Debug.Log("button pressed");
-		profileDisp.GetComponent<CanvasGroup>().alpha = 1;
-		profileDisp.GetComponent<CanvasGroup>().blocksRaycasts = true;
-		currentDocDisplayed = profileDisp.GetComponent<CanvasGroup>();
-		archivesButtonsDisp.GetComponent<CanvasGroup>().alpha = 1;
-		archivesButtonsDisp.GetComponent<CanvasGroup>().blocksRaycasts = true;
-		initiateJudgingDisp.GetComponent<CanvasGroup>().alpha = 1;
-		initiateJudgingDisp.GetComponent<CanvasGroup>().blocksRaycasts = true;
-		spriteName = profileDisp.sprite.name;
+        if (!hasAFolder)
+        {
+            numberOfFolder--;
+            nbFolderText.text = numberOfFolder.ToString();
+            Debug.Log("button pressed");
+		    profileDisp.GetComponent<CanvasGroup>().alpha = 1;
+		    profileDisp.GetComponent<CanvasGroup>().blocksRaycasts = true;
+		    currentDocDisplayed = profileDisp.GetComponent<CanvasGroup>();
+		    archivesButtonsDisp.GetComponent<CanvasGroup>().alpha = 1;
+		    archivesButtonsDisp.GetComponent<CanvasGroup>().blocksRaycasts = true;
+		    initiateJudgingDisp.GetComponent<CanvasGroup>().alpha = 1;
+		    initiateJudgingDisp.GetComponent<CanvasGroup>().blocksRaycasts = true;
+		    spriteName = profileDisp.sprite.name;
+            hasAFolder = true;
+        }
+       
 
 
 	}
@@ -279,6 +285,7 @@ public class DeskScript : MonoBehaviour
         hasFinance = false;
         hasMed = false;
         isJudging = false;
+        hasAFolder = false;
         judgingPanelDisp.GetComponent<CanvasGroup>().alpha = 0;
         judgingPanelDisp.GetComponent<CanvasGroup>().blocksRaycasts = false;
         backToMainSheetPanel.GetComponent<CanvasGroup>().alpha = 0;
@@ -300,8 +307,9 @@ public class DeskScript : MonoBehaviour
         crimeDocsDisp.GetComponent<CanvasGroup>().blocksRaycasts = false;
         medDocsDisp.GetComponent<CanvasGroup>().alpha = 0;
         medDocsDisp.GetComponent<CanvasGroup>().blocksRaycasts = false;
-        currentDocDisplayed.alpha = 1;
-        currentDocDisplayed.blocksRaycasts = true;
+        //currentDocDisplayed.alpha = 1;
+        //currentDocDisplayed.blocksRaycasts = true;
+
         foreach (Button b in btList)
         {
             b.gameObject.SetActive(true);
