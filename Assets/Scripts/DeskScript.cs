@@ -4,6 +4,8 @@ using UnityEditor;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
+
 
 public class DeskScript : MonoBehaviour
 {
@@ -27,11 +29,15 @@ public class DeskScript : MonoBehaviour
     bool hasFinance = false;
     bool hasMed = false;
     List<Button> btList;
+    int numberOfFolder;
+    public Text nbFolderText;
 
     // Use this for initialization
     void Start()
 	{
-		isZoomed = false;
+        numberOfFolder = 2;
+        nbFolderText.text = numberOfFolder.ToString();
+        isZoomed = false;
 		index = 0;
         btList = new List<Button>();
         foreach (Button b in medDocsDisp.GetComponentsInChildren<Button>())
@@ -55,7 +61,9 @@ public class DeskScript : MonoBehaviour
 
 	public void ZoomIn()
 	{
-		Debug.Log("button pressed");
+        numberOfFolder--;
+        nbFolderText.text = numberOfFolder.ToString();
+        Debug.Log("button pressed");
 		profileDisp.GetComponent<CanvasGroup>().alpha = 1;
 		profileDisp.GetComponent<CanvasGroup>().blocksRaycasts = true;
 		currentDocDisplayed = profileDisp.GetComponent<CanvasGroup>();
@@ -64,6 +72,8 @@ public class DeskScript : MonoBehaviour
 		initiateJudgingDisp.GetComponent<CanvasGroup>().alpha = 1;
 		initiateJudgingDisp.GetComponent<CanvasGroup>().blocksRaycasts = true;
 		spriteName = profileDisp.sprite.name;
+
+
 	}
 
 	public void ZoomOut()
@@ -208,16 +218,19 @@ public class DeskScript : MonoBehaviour
 		if(buttonClicked.name == "Innocent")
 		{
             cleanFiles();
+            currentF.GetCurrent().outcome = 2;
             Debug.Log("Innocent");
             
         }
 		else if(buttonClicked.name == "Investigate")
 		{
             cleanFiles();
+            currentF.GetCurrent().outcome = 3;
             Debug.Log("Investigate");
 		}
 		else
 		{
+            currentF.GetCurrent().outcome = 1;
             cleanFiles();
             Debug.Log("Guilty");
 		}
@@ -290,6 +303,16 @@ public class DeskScript : MonoBehaviour
         {
             b.gameObject.SetActive(true);
         }
+
+        currentF.NextFile();
+        t.ChangeTime(0, 27);
+       
+
+        if (numberOfFolder == 0)
+        {
+            SceneManager.LoadScene("Morgane");
+        }
         
     }
+
 }

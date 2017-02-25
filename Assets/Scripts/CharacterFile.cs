@@ -58,8 +58,8 @@ public class InfoPolitique
 
 public class CharacterInfos
 {
-    public int statut;
-    public int outcome;
+    public int statut;  // -1 New, 1 Returning selected as Non Guilty , 2 Investigated selected as To investigate , 3 Completed 
+    public int outcome; // -1 No choice yet, 1 GUilty, 2 Non Guilty, 3 ToInvestigate
 
     public bool guilty;
     public string number;

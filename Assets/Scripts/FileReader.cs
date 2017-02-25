@@ -9,7 +9,8 @@ public class FileReader : MonoBehaviour {
     protected FileInfo theSourceFile = null;
     protected StreamReader reader = null;
     protected string text = " "; // assigned to allow first line to be read below
-
+ 
+  
     void Start()
     {
         theSourceFile = new FileInfo("Fiches.txt");
@@ -23,10 +24,18 @@ public class FileReader : MonoBehaviour {
             text = reader.ReadLine();
         }
 
-
-
+        
         Debug.Log(listCharacters.Count);
         
+    }
+
+  void Awake()
+    {
+        DontDestroyOnLoad(this);
+        if (FindObjectsOfType(GetType()).Length > 1)
+        {
+            Destroy(gameObject);
+        }
     }
 
     public void CreateCharacter()
