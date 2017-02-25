@@ -58,6 +58,9 @@ public class InfoPolitique
 
 public class CharacterInfos
 {
+    public int statut;
+    public int outcome;
+
     public bool guilty;
     public string number;
     public int age;
@@ -72,8 +75,15 @@ public class CharacterInfos
     public InfoMedical medical;
     public InfoPolitique politique;
 
-    public CharacterInfos(bool guilt, string num, int a, string gen, string emp, string mar, string hob, string not, string d, string imp, string s, string p, string g, string m, string psy, string mal, string hos, string rel, string eng)
+    public CharacterInfos(bool guilt, string num, int a, string gen, string emp, string mar, string hob, string not, 
+        string d, string imp, string s, 
+        string p, string g, string m, 
+        string psy, string mal, string hos, 
+        string rel, string eng)
     {
+        statut = -1;//initializé à -1 pour savoir que c'est pas la valeur finale
+        outcome = -1;
+
         guilty = guilt;
         number = num;
         age = a;

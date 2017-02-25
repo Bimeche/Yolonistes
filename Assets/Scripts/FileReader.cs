@@ -23,15 +23,10 @@ public class FileReader : MonoBehaviour {
             text = reader.ReadLine();
         }
 
-        foreach (CharacterInfos i in listCharacters)
-        {
 
-            Debug.Log(i.guilty + " " + i.number + " " + i.age + " " + i.genre + " " + i.emploi + " " + i.hobbies + " " + i.notable + " "
-                + i.finance.dette + " " + i.finance.impots + " " + i.finance.solde
-                + " " + i.crime.atteintePersonnelle + " " + i.crime.atteinteGouvernement + " "+ i.crime.atteinteMaterielle + " "
-                + i.medical.psychologique + " " + i.medical.maladie + " " +   i.medical.hospitalisation + " "
-                + i.politique.religion + " " + i.politique.engagement + "\n");
-        }
+
+        Debug.Log(listCharacters.Count);
+        
     }
 
     public void CreateCharacter()
@@ -78,65 +73,66 @@ public class FileReader : MonoBehaviour {
         text = reader.ReadLine();
         hob = text;
         text = reader.ReadLine();
-        if(!text.Equals("0"))
+        if(!text.Equals("!"))
         {
             not = text;
         }
         text = reader.ReadLine();
 
-        if (!text.Equals("0"))
+        if (!text.Equals("!"))
         {
             d = text;
         }
         text = reader.ReadLine();
-        if (!text.Equals("0"))
+        if (!text.Equals("!"))
         {
             imp = text;
         }
-        text = reader.ReadLine(); if (!text.Equals("0"))
+        text = reader.ReadLine();
+        if (!text.Equals("!"))
         {
             s = text;
         }
         text = reader.ReadLine();
 
-        if (!text.Equals("0"))
+        if (!text.Equals("!"))
         {
             p = text;
         }
         text = reader.ReadLine();
-        if (!text.Equals("0"))
+        if (!text.Equals("!"))
         {
             g = text;
         }
         text = reader.ReadLine();
-        if (!text.Equals("0"))
+        if (!text.Equals("!"))
         {
             m = text;
         }
         text = reader.ReadLine();
 
-        if (!text.Equals("0"))
+        if (!text.Equals("!"))
         {
             psy = text;
         }
         text = reader.ReadLine();
-        if (!text.Equals("0"))
+        if (!text.Equals("!"))
         {
             mal = text;
         }
         text = reader.ReadLine();
-        if (!text.Equals("0"))
+        if (!text.Equals("!"))
         {
             hos = text;
         }
         text = reader.ReadLine();
 
-        if (!text.Equals("0"))
+        if (!text.Equals("!"))
         {
             rel = text;
         }
         text = reader.ReadLine();
-        if (!text.Equals("0"))
+        if (!text.Equals("!"))
         {
             eng = text;
         }
