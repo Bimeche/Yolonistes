@@ -17,7 +17,7 @@ public class MainMenu : MonoBehaviour {
 
     public void ClickPlay()
     {
-        SceneManager.LoadScene("BeginMusicScene");
+        SceneManager.LoadScene("Exposition");
     }
     public void ClickQuit()
     {

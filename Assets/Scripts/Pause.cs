@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class Pause : MonoBehaviour {
 
@@ -72,5 +73,19 @@ public class Pause : MonoBehaviour {
     {
         Debug.Log("Quit");
         Application.Quit();
+    }
+
+    public void ClickMenu()
+    {
+        blockingPanel.GetComponent<CanvasGroup>().alpha = 0;
+        blockingPanel.GetComponent<CanvasGroup>().blocksRaycasts = false;
+        p.gameObject.SetActive(false);
+        play.gameObject.SetActive(false);
+        quit.gameObject.SetActive(false);
+        Time.timeScale = 1;
+        Destroy(GameObject.Find("CurrentFolder").GetComponent<CurrentFloder>().gameObject);
+        Destroy(GameObject.Find("FileReader").GetComponent<FileReader>().gameObject);
+        Destroy(GameObject.Find("SoundManager").GetComponent<SoundManager>().gameObject);
+        SceneManager.LoadScene("MainMenu");
     }
 }
