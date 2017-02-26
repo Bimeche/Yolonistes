@@ -5,38 +5,25 @@ using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 
 public class Pause : MonoBehaviour {
-
-    public Image p;
+	
 	public Image blockingPanel;
-    public Button play;
-    public Button quit;
 	private AudioSource pauseMusic;
     private bool isPause = false;
 
     // Use this for initialization
     void Start () {
-     
-        p.gameObject.SetActive(false);
-        play.gameObject.SetActive (false);
-        quit.gameObject.SetActive(false);
-
 		pauseMusic = GameObject.Find("backgroundMusic").GetComponent<AudioSource>();
-		
-
     }
 	
 	// Update is called once per frame
 	void Update () {
-        
-        if (Input.GetKeyDown(KeyCode.P))
+
+		if (Input.GetKeyDown(KeyCode.P) || Input.GetKeyDown(KeyCode.Escape))
         {
             if (isPause)
 			{
 				blockingPanel.GetComponent<CanvasGroup>().alpha = 0;
 				blockingPanel.GetComponent<CanvasGroup>().blocksRaycasts = false;
-				p.gameObject.SetActive(false);
-                play.gameObject.SetActive(false);
-                quit.gameObject.SetActive(false);
                 Time.timeScale = 1;
                 isPause = false;
 				pauseMusic.Play();
@@ -46,9 +33,6 @@ public class Pause : MonoBehaviour {
 			{
 				blockingPanel.GetComponent<CanvasGroup>().alpha = 1;
 				blockingPanel.GetComponent<CanvasGroup>().blocksRaycasts = true;
-				p.gameObject.SetActive(true);
-                play.gameObject.SetActive(true);
-                quit.gameObject.SetActive(true);
                 Time.timeScale = 0;
                 isPause = true;
 				pauseMusic.Pause();
@@ -62,10 +46,7 @@ public class Pause : MonoBehaviour {
 	{
 		blockingPanel.GetComponent<CanvasGroup>().alpha = 0;
 		blockingPanel.GetComponent<CanvasGroup>().blocksRaycasts = false;
-		p.gameObject.SetActive(false);
         isPause = false;
-        play.gameObject.SetActive(false);
-        quit.gameObject.SetActive(false);
         Time.timeScale = 1;
 		pauseMusic.Play();
     }
@@ -79,13 +60,11 @@ public class Pause : MonoBehaviour {
     {
         blockingPanel.GetComponent<CanvasGroup>().alpha = 0;
         blockingPanel.GetComponent<CanvasGroup>().blocksRaycasts = false;
-        p.gameObject.SetActive(false);
-        play.gameObject.SetActive(false);
-        quit.gameObject.SetActive(false);
         Time.timeScale = 1;
         Destroy(GameObject.Find("CurrentFolder").GetComponent<CurrentFloder>().gameObject);
         Destroy(GameObject.Find("FileReader").GetComponent<FileReader>().gameObject);
         Destroy(GameObject.Find("SoundManager").GetComponent<SoundManager>().gameObject);
+		Destroy(GameObject.Find("backgroundMusic"));
         SceneManager.LoadScene("MainMenu");
     }
 }

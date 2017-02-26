@@ -46,6 +46,11 @@ public class Timer : MonoBehaviour {
      //   ChangeTime(0, 1);
 	}
 
+	public int GetHeure()
+	{
+		return dh * 10 + uh;
+	}
+
     public void ChangeTime(int AddHeure, int AddMinutes)
     {
 

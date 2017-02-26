@@ -19,6 +19,7 @@ public class DeskScript : MonoBehaviour
 	public Image judgingPanelDisp;
 	public Image backToMainSheetPanel;
 	public Image reportPanel;
+	public Image archivesClosed;
 	private CurrentFloder currentF;
 	private CanvasGroup currentDocDisplayed;
 	private int index;
@@ -44,7 +45,7 @@ public class DeskScript : MonoBehaviour
 	public AudioSource phonePutDown;
 	public AudioSource endOfFolder;
 	private SoundManager sm;
-    
+	float timeArchive = -1;
     // Use this for initialization
     void Start()
 	{
@@ -84,6 +85,12 @@ public class DeskScript : MonoBehaviour
 	// Update is called once per frame
 	void Update()
 	{
+		if(1 - (Time.time - timeArchive)>0 && timeArchive + 1 > Time.time)
+		{
+			archivesClosed.GetComponent<CanvasGroup>().alpha = 1-(Time.time - timeArchive);
+				
+		}
+
 	}
 
 	public void ClickOnReport()
@@ -123,14 +130,22 @@ public class DeskScript : MonoBehaviour
 	{
 		isZoomed = false;
 	}
-
+	
 	public void UnlockArchivesButtons()
 	{
-		unlockArchives.GetComponent<CanvasGroup>().alpha = 0;
-		unlockArchives.GetComponent<CanvasGroup>().blocksRaycasts = false;
-		archivesButtonsDisp.GetComponent<CanvasGroup>().alpha = 1;
-		archivesButtonsDisp.GetComponent<CanvasGroup>().blocksRaycasts = true;
-		sm.PlaySingle(phonePickUp.clip);
+		if (t.GetHeure() >= 16)
+		{
+			archivesClosed.GetComponent<CanvasGroup>().alpha = 1;
+			timeArchive = Time.time;
+		}
+		else
+		{
+			unlockArchives.GetComponent<CanvasGroup>().alpha = 0;
+			unlockArchives.GetComponent<CanvasGroup>().blocksRaycasts = false;
+			archivesButtonsDisp.GetComponent<CanvasGroup>().alpha = 1;
+			archivesButtonsDisp.GetComponent<CanvasGroup>().blocksRaycasts = true;
+			sm.PlaySingle(phonePickUp.clip);
+		}
 	}
 
 	public void MedDocs()
