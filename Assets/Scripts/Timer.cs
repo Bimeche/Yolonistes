@@ -6,51 +6,119 @@ using UnityEngine;
 public class Timer : MonoBehaviour {
 
     Text myText;
+    Image hd;
+    Image hu;
+    Image md;
+    Image mu;
+    public Sprite i0;
+    public Sprite i1;
+    public Sprite i2;
+    public Sprite i3;
+    public Sprite i4;
+    public Sprite i5;
+    public Sprite i6;
+    public Sprite i7;
+    public Sprite i8;
+    public Sprite i9;
+
     int heure;
     int minutes;
+    int dh = 0;
+    int uh = 8;
+    int dm = 0;
+    int um = 0;
 
     // Use this for initialization
     void Start () {
-        myText = GetComponent<Text>();
-        myText.text = "08 : 00";
+        hd = GameObject.Find("HeureD").GetComponent<Image>();
+        hu = GameObject.Find("HeureU").GetComponent<Image>();
+        md = GameObject.Find("MinutesD").GetComponent<Image>();
+        mu = GameObject.Find("MinutesU").GetComponent<Image>();
+         dh = 0;
+         uh = 8;
+         dm = 0;
+         um = 0;
         heure = 8;
         minutes = 0;
 	}
 	
-	// Update is called once per frame
 	void Update () {
-       // ChangeTime(0, 1);
-        
+        ChangeTime(0, 1);
 	}
 
     public void ChangeTime(int AddHeure, int AddMinutes)
     {
-        minutes = minutes + AddMinutes;
-        if (minutes >= 60)
+
+        um = um + AddMinutes;
+        while (um > 9)
         {
-            minutes = minutes - 60;
-            heure++;
+            dm++;
+            um = um - 10;
         }
 
-        heure = heure + AddHeure;
+        if (dm > 5)
+        {
+            uh++;
+            dm = dm - 6;
+        }
 
-        string HString;
-        if (heure < 10)
-            HString = "0" + heure.ToString();
-        else
-            HString = heure.ToString();
+        uh = uh + AddHeure;
+        if (uh > 9)
+        {
+            dh++;
+            uh = uh - 10;
+        }
 
-        string MString;
-        if (minutes < 10)
-            MString = "0" + minutes.ToString();
-        else
-            MString = minutes.ToString();
+        Debug.Log(dh + uh + "   " + dm + um);
 
-        
-            myText.text = HString + " : " + MString;
-
-        if (heure >= 18)
-            Debug.Log("End Day");
+        applySprite(dh, hd);
+        applySprite(uh, hu);
+        applySprite(dm, md);
+        applySprite(um, mu);
 
     }
+
+    void applySprite(int num, Image spr)
+    {
+        switch (num)
+        {
+            case 0:
+                spr.sprite = i0;
+                break;
+            case 1:
+                spr.sprite = i1;
+                break;
+            case 2:
+                spr.sprite = i2;
+                break;
+            case 3:
+                spr.sprite = i3;
+                break;
+            case 4:
+                spr.sprite = i4;
+                break;
+            case 5:
+                spr.sprite = i5;
+                break;
+            case 6:
+                spr.sprite = i6;
+                break;
+            case 7:
+                spr.sprite = i7;
+                break;
+            case 8:
+                spr.sprite = i8;
+                break;
+            case 9:
+                spr.sprite = i9;
+                break;
+
+
+            default:
+                spr.sprite = i0;
+                break;
+        }
+    }
+
+    
 }
