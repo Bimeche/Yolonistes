@@ -80,6 +80,7 @@ public class CurrentFloder : MonoBehaviour {
             if(innocentVictims > 0)
             {
                 Files.listCharacters[index].guilty = true;
+                Files.listCharacters[index].crime.atteintePersonnelle = innocentVictims + " victimes.";
             }
             else if(guiltScore > 4)
             {
