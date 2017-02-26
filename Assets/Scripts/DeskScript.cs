@@ -30,7 +30,6 @@ public class DeskScript : MonoBehaviour
 	private bool hasMed = false;
 	private bool hasAFolder = false;
 	private List<Button> btList;
-	private int numberOfFolder;
     public Text nbFolderText;
     public double successRate;
 	public FillSheet fillSheet;
@@ -52,12 +51,12 @@ public class DeskScript : MonoBehaviour
 	{
         
         currentF = GameObject.Find("CurrentFolder").GetComponent<CurrentFloder>();
-        numberOfFolder = currentF.numberFolder;
-        nbFolderText.text = numberOfFolder.ToString();
+        currentF.numberFolder=2;
+        nbFolderText.text = currentF.numberFolder.ToString();
 		sm = GameObject.Find("SoundManager").GetComponent<SoundManager>();
 		if (currentF.day > 1)
         {
-            successRate = (1.00 - (double)currentF.badDecisions / numberOfFolder)*100;
+            successRate = (1.00 - (double)currentF.badDecisions / currentF.numberFolder) *100;
 			currentF.badDecisions = 0;
 			reportPanel.GetComponentInChildren<Text>().text = reportPanel.GetComponentInChildren<Text>().text.Replace("x", successRate.ToString());
 			reportPanel.GetComponent<CanvasGroup>().alpha = 1;
@@ -105,8 +104,8 @@ public class DeskScript : MonoBehaviour
 	{
         if (!hasAFolder)
         {
-            numberOfFolder--;
-            nbFolderText.text = numberOfFolder.ToString();
+            currentF.numberFolder--;
+            nbFolderText.text = currentF.numberFolder.ToString();
 		    profileDisp.GetComponent<CanvasGroup>().alpha = 1;
 		    profileDisp.GetComponent<CanvasGroup>().blocksRaycasts = true;
 		    currentDocDisplayed = profileDisp.GetComponent<CanvasGroup>();
@@ -453,12 +452,15 @@ public class DeskScript : MonoBehaviour
             b.gameObject.SetActive(true);
         }
 
-        currentF.NextFile();
-		Debug.Log(currentF.badDecisions);
+        if (currentF.index != 0)
+        {
+            currentF.NextFile();
+        }
+        Debug.Log(currentF.badDecisions);
         t.ChangeTime(0, 27);
        
 
-        if (numberOfFolder == 0)
+        if (currentF.numberFolder == 0)
         {
             currentF.day++;
             if(currentF.index == 0)
