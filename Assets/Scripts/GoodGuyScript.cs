@@ -14,7 +14,6 @@ public class GoodGuyScript : MonoBehaviour {
 
     public Text text;
 
-
     int slide;
     int slideMax = 2;
 

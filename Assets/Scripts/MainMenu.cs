@@ -6,8 +6,11 @@ using UnityEngine.SceneManagement;
 
 
 public class MainMenu : MonoBehaviour {
+	public AudioSource music;
+
     // Use this for initialization
     void Start () {
+		DontDestroyOnLoad(music);
 	}
 	
 	// Update is called once per frame
@@ -27,6 +30,7 @@ public class MainMenu : MonoBehaviour {
 
     public void ClickCredits()
     {
+		Destroy(music);
         SceneManager.LoadScene("Joelle");
     }
 }

@@ -73,6 +73,7 @@ public class ExpositionScript : MonoBehaviour {
         }
         else if(slide == slideMax)
         {
+			Destroy(GameObject.Find("menu"));
             SceneManager.LoadScene("BeginMusicScene");
         }
     }

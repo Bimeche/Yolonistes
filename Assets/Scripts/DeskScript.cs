@@ -506,17 +506,20 @@ public class DeskScript : MonoBehaviour
                 //fin 1: juge coupable et coupable ou innocent (lol tu meurs)
                 if(currentF.Files.listCharacters[currentF.index].outcome == 1)
                 {
+					Destroy(GameObject.Find("backgroundMusic"));
                     SceneManager.LoadScene("DeathEnding");
                 }
                 //fin 2: juge innocent et innocent ou coupable (texte change)
                 if(currentF.Files.listCharacters[currentF.index].outcome == 2)
-                {
-                    SceneManager.LoadScene("GoodGuyEnding");
+				{
+					Destroy(GameObject.Find("backgroundMusic"));
+					SceneManager.LoadScene("GoodGuyEnding");
                 }
                 //fin 3: demande enquete
                 if(currentF.Files.listCharacters[currentF.index].outcome == 3)
-                {
-                    SceneManager.LoadScene("InvestigationEnding");
+				{
+					Destroy(GameObject.Find("backgroundMusic"));
+					SceneManager.LoadScene("InvestigationEnding");
                 }
             }
             else
