@@ -24,10 +24,14 @@ public class Player : MonoBehaviour
 
         if(movement_vector != Vector2.zero)
         {
-         //   animator.SetBool("iswalking", true);
-        }else
+            animator.SetBool("isWalking", true);
+            animator.SetFloat("input_x", movement_vector.x);
+            animator.SetFloat("input_y", movement_vector.y);
+
+        }
+        else
         {
-           // animator.SetBool("iswalking", false);
+            animator.SetBool("isWalking", false);
         }
 
         rbody.MovePosition(rbody.position + movement_vector * Time.deltaTime * 5);

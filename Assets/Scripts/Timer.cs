@@ -43,7 +43,7 @@ public class Timer : MonoBehaviour {
 	}
 	
 	void Update () {
-        ChangeTime(0, 1);
+     //   ChangeTime(0, 1);
 	}
 
     public void ChangeTime(int AddHeure, int AddMinutes)
