@@ -471,7 +471,7 @@ public class DeskScript : MonoBehaviour
                     SceneManager.LoadScene("DeathEnding");
                 }
                 //fin 2: juge innocent et innocent ou coupable (texte change)
-                if(currentF.Files.listCharacters[currentF.index].outcome == 2 && currentF.Files.listCharacters[currentF.index].guilty == false)
+                if(currentF.Files.listCharacters[currentF.index].outcome == 2)
                 {
                     SceneManager.LoadScene("GoodGuyEnding");
                 }
