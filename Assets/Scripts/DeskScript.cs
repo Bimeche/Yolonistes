@@ -32,14 +32,23 @@ public class DeskScript : MonoBehaviour
     List<Button> btList;
     int numberOfFolder;
     public Text nbFolderText;
-
+    public double successRate;
     
     // Use this for initialization
     void Start()
 	{
+        Debug.Log("start" + gameObject.name);
+        
         currentF = GameObject.Find("CurrentFolder").GetComponent<CurrentFloder>();
-        numberOfFolder = 2;
+        numberOfFolder = currentF.numberFolder;
         nbFolderText.text = numberOfFolder.ToString();
+
+        if(currentF.day > 1)
+        {
+            successRate = (1.00 - (double)currentF.badDecisions / numberOfFolder)*100;
+            Debug.Log("success : " + successRate + "%");
+        }
+
         
         isZoomed = false;
 		index = 0;
@@ -331,6 +340,8 @@ public class DeskScript : MonoBehaviour
 
         if (numberOfFolder == 0)
         {
+            currentF.day++;
+            currentF.badDecisions = 0;
             SceneManager.LoadScene("Morgane");
         }
         
