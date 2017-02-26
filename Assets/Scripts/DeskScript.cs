@@ -47,42 +47,46 @@ public class DeskScript : MonoBehaviour
 	public AudioSource endOfFolder;
 	private SoundManager sm;
 	float timeArchive = -1;
-    // Use this for initialization
-    void Start()
+	// Use this for initialization
+	void Start()
 	{
-        
-        currentF = GameObject.Find("CurrentFolder").GetComponent<CurrentFloder>();
-        currentF.numberFolder=3;
-        nbFolderText.text = currentF.numberFolder.ToString();
+
+		currentF = GameObject.Find("CurrentFolder").GetComponent<CurrentFloder>();
+		currentF.numberFolder = 3;
+		nbFolderText.text = currentF.numberFolder.ToString();
 		sm = GameObject.Find("SoundManager").GetComponent<SoundManager>();
 		if (currentF.day > 1)
-        {
-            successRate = System.Math.Round((1.00 - (double)currentF.badDecisions / currentF.numberFolder) *100,2);
+		{
+			successRate = System.Math.Round((1.00 - (double)currentF.badDecisions / currentF.numberFolder) * 100, 2);
 			currentF.badDecisions = 0;
 			reportPanel.GetComponentInChildren<Text>().text = reportPanel.GetComponentInChildren<Text>().text.Replace("x", successRate.ToString());
 			reportPanel.GetComponent<CanvasGroup>().alpha = 1;
 			reportPanel.GetComponent<CanvasGroup>().blocksRaycasts = true;
-        }
+		}
 
-        
-        isZoomed = false;
+
+		isZoomed = false;
 		index = 0;
-        btList = new List<Button>();
+		btList = new List<Button>();
 		isJudging = false;
-        foreach (Button b in medDocsDisp.GetComponentsInChildren<Button>())
-        {
-            btList.Add(b);
-        }
-        foreach (Button b in crimeDocsDisp.GetComponentsInChildren<Button>())
-        {
-            btList.Add(b);
-        }
-        foreach (Button b in moneyDocsDisp.GetComponentsInChildren<Button>())
-        {
-            btList.Add(b);
-        }
+		foreach (Button b in medDocsDisp.GetComponentsInChildren<Button>())
+		{
+			btList.Add(b);
+		}
+		foreach (Button b in crimeDocsDisp.GetComponentsInChildren<Button>())
+		{
+			btList.Add(b);
+		}
+		foreach (Button b in moneyDocsDisp.GetComponentsInChildren<Button>())
+		{
+			btList.Add(b);
+		}
 
-    }
+		foreach (Button b in judgingPanelDisp.GetComponentsInChildren<Button>())
+		{
+			btList.Add(b);
+		}
+	}
 	// Update is called once per frame
 	void Update()
 	{
@@ -299,6 +303,17 @@ public class DeskScript : MonoBehaviour
         {
 		    judgingPanelDisp.GetComponent<CanvasGroup>().alpha = 1;
 		    judgingPanelDisp.GetComponent<CanvasGroup>().blocksRaycasts = true;
+
+			if (currentF.GetCurrent().outcome == 3)
+			{
+				foreach (Button b in judgingPanelDisp.GetComponentsInChildren<Button>())
+				{
+					if (b.name == "Investigate")
+							b.gameObject.SetActive(false);
+						else
+							b.gameObject.SetActive(true);
+				}
+			}
             isJudging = true;
 			sm.PlaySingle(stampUp.clip);
         }
