@@ -110,7 +110,8 @@ public class DeskScript : MonoBehaviour
 		    profileDisp.GetComponent<CanvasGroup>().blocksRaycasts = true;
 		    currentDocDisplayed = profileDisp.GetComponent<CanvasGroup>();
 			unlockArchives.GetComponent<CanvasGroup>().blocksRaycasts = true;
-		    initiateJudgingDisp.GetComponent<CanvasGroup>().alpha = 1;
+			unlockArchives.GetComponent<CanvasGroup>().alpha = 1;
+			initiateJudgingDisp.GetComponent<CanvasGroup>().alpha = 1;
 		    initiateJudgingDisp.GetComponent<CanvasGroup>().blocksRaycasts = true;
             hasAFolder = true;
 			fillSheet.FillMainSheet(currentF.GetCurrent().number, currentF.GetCurrent().age.ToString(), currentF.GetCurrent().genre, currentF.GetCurrent().emploi, currentF.GetCurrent().marital, currentF.GetCurrent().hobbies, currentF.GetCurrent().notable, currentF.GetCurrent().politique.religion, currentF.GetCurrent().politique.engagement, currentF.GetCurrent().outcome);
@@ -135,6 +136,7 @@ public class DeskScript : MonoBehaviour
 	{
 		if (t.GetHeure() >= 16)
 		{
+			archivesClosed.GetComponentInChildren<Text>().text = "Archives are closed for today";
 			archivesClosed.GetComponent<CanvasGroup>().alpha = 1;
 			timeArchive = Time.time;
 		}
@@ -176,6 +178,12 @@ public class DeskScript : MonoBehaviour
             hasMed = true;
 			if(medDocsDisp.GetComponentsInChildren<Button>().Length !=0)
 				t.ChangeTime(1, Random.Range(0, 59));
+			else
+			{
+				archivesClosed.GetComponentInChildren<Text>().text = "No files found";
+				archivesClosed.GetComponent<CanvasGroup>().alpha = 1;
+				timeArchive = Time.time;
+			}
 			unlockArchives.GetComponent<CanvasGroup>().alpha = 1;
 			unlockArchives.GetComponent<CanvasGroup>().blocksRaycasts = true;
 			archivesButtonsDisp.GetComponent<CanvasGroup>().alpha = 0;
@@ -213,6 +221,12 @@ public class DeskScript : MonoBehaviour
             hasCrime = true;
 			if (crimeDocsDisp.GetComponentsInChildren<Button>().Length != 0)
 				t.ChangeTime(1, Random.Range(0, 59));
+			else
+			{
+				archivesClosed.GetComponentInChildren<Text>().text = "No files found";
+				archivesClosed.GetComponent<CanvasGroup>().alpha = 1;
+				timeArchive = Time.time;
+			}
 			unlockArchives.GetComponent<CanvasGroup>().alpha = 1;
 			unlockArchives.GetComponent<CanvasGroup>().blocksRaycasts = true;
 			archivesButtonsDisp.GetComponent<CanvasGroup>().alpha = 0;
@@ -251,6 +265,12 @@ public class DeskScript : MonoBehaviour
             hasFinance = true;
 			if (moneyDocsDisp.GetComponentsInChildren<Button>().Length != 0)
 				t.ChangeTime(1, Random.Range(0, 59));
+			else
+			{
+				archivesClosed.GetComponentInChildren<Text>().text = "No files found";
+				archivesClosed.GetComponent<CanvasGroup>().alpha = 1;
+				timeArchive = Time.time;
+			}
 			unlockArchives.GetComponent<CanvasGroup>().alpha = 1;
 			unlockArchives.GetComponent<CanvasGroup>().blocksRaycasts = true;
 			archivesButtonsDisp.GetComponent<CanvasGroup>().alpha = 0;
@@ -455,7 +475,6 @@ public class DeskScript : MonoBehaviour
             currentF.NextFile();
 
         }
-        Debug.Log(currentF.badDecisions);
         t.ChangeTime(0, Random.Range(0, 59));
        
 
