@@ -21,7 +21,6 @@ public class DeskScript : MonoBehaviour
 	public Image backToMainSheetPanel;
 	private CurrentFloder currentF;
 	private CanvasGroup currentDocDisplayed;
-	private string spriteName;
 	private int index;
 	private bool isJudging;
     public Timer t;
@@ -87,9 +86,11 @@ public class DeskScript : MonoBehaviour
 			unlockArchives.GetComponent<CanvasGroup>().blocksRaycasts = true;
 		    initiateJudgingDisp.GetComponent<CanvasGroup>().alpha = 1;
 		    initiateJudgingDisp.GetComponent<CanvasGroup>().blocksRaycasts = true;
-		    spriteName = profileDisp.sprite.name;
             hasAFolder = true;
 			fillSheet.FillMainSheet(currentF.GetCurrent().number, currentF.GetCurrent().age.ToString(), currentF.GetCurrent().genre, currentF.GetCurrent().emploi, currentF.GetCurrent().marital, currentF.GetCurrent().hobbies, currentF.GetCurrent().notable, currentF.GetCurrent().politique.religion, currentF.GetCurrent().politique.engagement, currentF.GetCurrent().statut);
+			fillSheet.FillInfoSheets("MedicalArchives", "");
+			fillSheet.FillInfoSheets("CriminalArchives", "");
+			fillSheet.FillInfoSheets("FinancialArchives", "");
 		}
 
 
@@ -121,7 +122,7 @@ public class DeskScript : MonoBehaviour
             {
                 Debug.Log(b.name);
                 if (b.name=="MedPage1")
-                    if(currentF.GetCurrent().medical.hospitalisation.Equals(""))
+                    if(currentF.GetCurrent().medical.psychologique.Equals(""))
                         b.gameObject.SetActive ( false);
                     else
                         b.gameObject.SetActive(true);
@@ -131,7 +132,7 @@ public class DeskScript : MonoBehaviour
                     else
                         b.gameObject.SetActive(true);
                else if (b.name == "MedPage3")
-                    if (currentF.GetCurrent().medical.psychologique.Equals(""))
+                    if (currentF.GetCurrent().medical.hospitalisation.Equals(""))
                         b.gameObject.SetActive(false);
                     else
                         b.gameObject.SetActive(true);
@@ -159,17 +160,17 @@ public class DeskScript : MonoBehaviour
             {
                 Debug.Log(b.name);
                 if (b.name == "CrimePage1")
-                    if (currentF.GetCurrent().crime.atteinteGouvernement.Equals(""))
+                    if (currentF.GetCurrent().crime.atteintePersonnelle.Equals(""))
                         b.gameObject.SetActive(false);
                     else
                         b.gameObject.SetActive(true);
                 else if (b.name == "CrimePage2")
-                    if (currentF.GetCurrent().crime.atteinteMaterielle.Equals(""))
+                    if (currentF.GetCurrent().crime.atteinteGouvernement.Equals(""))
                         b.gameObject.SetActive(false);
                     else
                         b.gameObject.SetActive(true);
                 else if (b.name == "CrimePage3")
-                    if (currentF.GetCurrent().crime.atteintePersonnelle.Equals(""))
+                    if (currentF.GetCurrent().crime.atteinteMaterielle.Equals(""))
                         b.gameObject.SetActive(false);
                     else
                         b.gameObject.SetActive(true);
@@ -273,12 +274,12 @@ public class DeskScript : MonoBehaviour
 		currentDocDisplayed.blocksRaycasts = true;
 		backToMainSheetPanel.GetComponent<CanvasGroup>().alpha = 0;
 		backToMainSheetPanel.GetComponent<CanvasGroup>().blocksRaycasts = false;
-		//profileDisp.sprite = 
-		spriteName = profileDisp.sprite.name;
 		currentDocDisplayed = profileDisp.GetComponent<CanvasGroup>();
 		profileDisp.sprite = AssetDatabase.LoadAssetAtPath<Sprite>("Assets/Sprites/Fiche_Base.png");
-		spriteName = profileDisp.sprite.name;
 		fillSheet.FillMainSheet(currentF.GetCurrent().number, currentF.GetCurrent().age.ToString(), currentF.GetCurrent().genre, currentF.GetCurrent().emploi, currentF.GetCurrent().marital, currentF.GetCurrent().hobbies, currentF.GetCurrent().notable, currentF.GetCurrent().politique.religion, currentF.GetCurrent().politique.engagement, currentF.GetCurrent().statut);
+		fillSheet.FillInfoSheets("MedicalArchives", "");
+		fillSheet.FillInfoSheets("CriminalArchives", "");
+		fillSheet.FillInfoSheets("FinancialArchives", "");
 	}
 
 	public void informationSheet()
@@ -295,48 +296,75 @@ public class DeskScript : MonoBehaviour
 
 		if (buttonClicked.name == "MedPage1")
 		{
+			fillSheet.FillInfoSheets("MedicalArchives", currentF.GetCurrent().medical.psychologique);
+			fillSheet.FillMainSheet("","","","","","","","","",10);
+			fillSheet.FillInfoSheets("CriminalArchives", "");
+			fillSheet.FillInfoSheets("FinancialArchives", "");
 			profileDisp.sprite = AssetDatabase.LoadAssetAtPath<Sprite>("Assets/Sprites/Fiche_Medicale.png");
-			spriteName = profileDisp.sprite.name;
 		}
 		else if (buttonClicked.name == "MedPage2")
 		{
+			fillSheet.FillInfoSheets("MedicalArchives", currentF.GetCurrent().medical.maladie);
+			fillSheet.FillMainSheet("", "", "", "", "", "", "", "", "", 10);
+			fillSheet.FillInfoSheets("CriminalArchives", "");
+			fillSheet.FillInfoSheets("FinancialArchives", "");
 			profileDisp.sprite = AssetDatabase.LoadAssetAtPath<Sprite>("Assets/Sprites/Fiche_Medicale.png");
-			spriteName = profileDisp.sprite.name;
 		}
 		else if (buttonClicked.name == "MedPage3")
 		{
+			fillSheet.FillInfoSheets("MedicalArchives", currentF.GetCurrent().medical.hospitalisation);
+			fillSheet.FillMainSheet("", "", "", "", "", "", "", "", "", 10);
+			fillSheet.FillInfoSheets("CriminalArchives", "");
+			fillSheet.FillInfoSheets("FinancialArchives", "");
 			profileDisp.sprite = AssetDatabase.LoadAssetAtPath<Sprite>("Assets/Sprites/Fiche_Medicale.png");
-			spriteName = profileDisp.sprite.name;
 		}
 		else if (buttonClicked.name == "CrimePage1")
 		{
+			fillSheet.FillInfoSheets("CriminalArchives", currentF.GetCurrent().crime.atteintePersonnelle);
+			fillSheet.FillMainSheet("", "", "", "", "", "", "", "", "", 10);
+			fillSheet.FillInfoSheets("MedicalArchives", "");
+			fillSheet.FillInfoSheets("FinancialArchives", "");
 			profileDisp.sprite = AssetDatabase.LoadAssetAtPath<Sprite>("Assets/Sprites/Fiche_Criminelle.png");
-			spriteName = profileDisp.sprite.name;
 		}
 		else if (buttonClicked.name == "CrimePage2")
 		{
+			fillSheet.FillInfoSheets("CriminalArchives", currentF.GetCurrent().crime.atteinteGouvernement);
+			fillSheet.FillMainSheet("", "", "", "", "", "", "", "", "", 10);
+			fillSheet.FillInfoSheets("MedicalArchives", "");
+			fillSheet.FillInfoSheets("FinancialArchives", "");
 			profileDisp.sprite = AssetDatabase.LoadAssetAtPath<Sprite>("Assets/Sprites/Fiche_Criminelle.png");
-			spriteName = profileDisp.sprite.name;
 		}
 		else if (buttonClicked.name == "CrimePage3")
 		{
+			fillSheet.FillInfoSheets("CriminalArchives", currentF.GetCurrent().crime.atteinteMaterielle);
+			fillSheet.FillMainSheet("", "", "", "", "", "", "", "", "", 10);
+			fillSheet.FillInfoSheets("MedicalArchives", "");
+			fillSheet.FillInfoSheets("FinancialArchives", "");
 			profileDisp.sprite = AssetDatabase.LoadAssetAtPath<Sprite>("Assets/Sprites/Fiche_Criminelle.png");
-			spriteName = profileDisp.sprite.name;
 		}
 		else if (buttonClicked.name == "MoneyPage1")
 		{
+			fillSheet.FillInfoSheets("FinancialArchives", currentF.GetCurrent().finance.dette);
+			fillSheet.FillMainSheet("", "", "", "", "", "", "", "", "", 10);
+			fillSheet.FillInfoSheets("MedicalArchives", "");
+			fillSheet.FillInfoSheets("CriminalArchives", "");
 			profileDisp.sprite = AssetDatabase.LoadAssetAtPath<Sprite>("Assets/Sprites/Fiche_Investigation_2.png");
-			spriteName = profileDisp.sprite.name;
 		}
 		else if (buttonClicked.name == "MoneyPage2")
 		{
+			fillSheet.FillInfoSheets("FinancialArchives", currentF.GetCurrent().finance.impots);
+			fillSheet.FillMainSheet("", "", "", "", "", "", "", "", "", 10);
+			fillSheet.FillInfoSheets("MedicalArchives", "");
+			fillSheet.FillInfoSheets("CriminalArchives", "");
 			profileDisp.sprite = AssetDatabase.LoadAssetAtPath<Sprite>("Assets/Sprites/Fiche_Investigation_2.png");
-			spriteName = profileDisp.sprite.name;
 		}
 		else if (buttonClicked.name == "MoneyPage3")
 		{
+			fillSheet.FillInfoSheets("FinancialArchives", currentF.GetCurrent().finance.solde);
+			fillSheet.FillMainSheet("", "", "", "", "", "", "", "", "", 10);
+			fillSheet.FillInfoSheets("MedicalArchives", "");
+			fillSheet.FillInfoSheets("CriminalArchives", "");
 			profileDisp.sprite = AssetDatabase.LoadAssetAtPath<Sprite>("Assets/Sprites/Fiche_Investigation_2.png");
-			spriteName = profileDisp.sprite.name;
 		}
 	}
 

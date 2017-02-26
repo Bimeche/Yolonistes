@@ -35,9 +35,20 @@ public class FillSheet : MonoBehaviour {
 			GameObject.Find("Religion").GetComponent<Text>().text = num;
 			GameObject.Find("Politique").GetComponent<Text>().text = politique;
 		}
+		else if(investigated == 10)
+		{
+
+			GameObject.Find("Religion").GetComponent<Text>().text = "";
+			GameObject.Find("Politique").GetComponent<Text>().text = "";
+		}
 		else{
 			GameObject.Find("Religion").GetComponent<Text>().text = "?";
 			GameObject.Find("Politique").GetComponent<Text>().text = "?";
 		}
+	}
+
+	public void FillInfoSheets(string archiveName, string info)
+	{
+		GameObject.Find(archiveName).GetComponent<Text>().text = info;
 	}
 }
