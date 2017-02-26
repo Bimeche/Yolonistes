@@ -12,6 +12,7 @@ public class DeskScript : MonoBehaviour
 	private bool isZoomed;
 	public Image profileDisp;
 	public Image archivesButtonsDisp;
+	public Image unlockArchives;
 	public Image medDocsDisp;
 	public Image crimeDocsDisp;
 	public Image moneyDocsDisp;
@@ -21,7 +22,6 @@ public class DeskScript : MonoBehaviour
     CurrentFloder currentF;
 	private CanvasGroup currentDocDisplayed;
 	private string spriteName;
-	private CharacterInfos[] daysFilesList;
 	private int index;
     bool isJudging;
     public Timer t;
@@ -53,6 +53,7 @@ public class DeskScript : MonoBehaviour
         isZoomed = false;
 		index = 0;
         btList = new List<Button>();
+		isJudging = false;
         foreach (Button b in medDocsDisp.GetComponentsInChildren<Button>())
         {
             btList.Add(b);
@@ -82,8 +83,7 @@ public class DeskScript : MonoBehaviour
 		    profileDisp.GetComponent<CanvasGroup>().alpha = 1;
 		    profileDisp.GetComponent<CanvasGroup>().blocksRaycasts = true;
 		    currentDocDisplayed = profileDisp.GetComponent<CanvasGroup>();
-		    archivesButtonsDisp.GetComponent<CanvasGroup>().alpha = 1;
-		    archivesButtonsDisp.GetComponent<CanvasGroup>().blocksRaycasts = true;
+			unlockArchives.GetComponent<CanvasGroup>().blocksRaycasts = true;
 		    initiateJudgingDisp.GetComponent<CanvasGroup>().alpha = 1;
 		    initiateJudgingDisp.GetComponent<CanvasGroup>().blocksRaycasts = true;
 		    spriteName = profileDisp.sprite.name;
@@ -97,6 +97,14 @@ public class DeskScript : MonoBehaviour
 	public void ZoomOut()
 	{
 		isZoomed = false;
+	}
+
+	public void UnlockArchivesButtons()
+	{
+		unlockArchives.GetComponent<CanvasGroup>().alpha = 0;
+		unlockArchives.GetComponent<CanvasGroup>().blocksRaycasts = false;
+		archivesButtonsDisp.GetComponent<CanvasGroup>().alpha = 1;
+		archivesButtonsDisp.GetComponent<CanvasGroup>().blocksRaycasts = true;
 	}
 
 	public void MedDocs()
@@ -128,7 +136,11 @@ public class DeskScript : MonoBehaviour
             }
             hasMed = true;
             t.ChangeTime(2, 27);
-        }
+			unlockArchives.GetComponent<CanvasGroup>().alpha = 1;
+			unlockArchives.GetComponent<CanvasGroup>().blocksRaycasts = true;
+			archivesButtonsDisp.GetComponent<CanvasGroup>().alpha = 0;
+			archivesButtonsDisp.GetComponent<CanvasGroup>().blocksRaycasts = false;
+		}
        
         
     }
@@ -162,7 +174,11 @@ public class DeskScript : MonoBehaviour
             }
             hasCrime = true;
             t.ChangeTime(1, 42);
-        }
+			unlockArchives.GetComponent<CanvasGroup>().alpha = 1;
+			unlockArchives.GetComponent<CanvasGroup>().blocksRaycasts = true;
+			archivesButtonsDisp.GetComponent<CanvasGroup>().alpha = 0;
+			archivesButtonsDisp.GetComponent<CanvasGroup>().blocksRaycasts = false;
+		}
 		
     }
 
@@ -196,7 +212,11 @@ public class DeskScript : MonoBehaviour
             }
             hasFinance = true;
             t.ChangeTime(3, 19);
-        }
+			unlockArchives.GetComponent<CanvasGroup>().alpha = 1;
+			unlockArchives.GetComponent<CanvasGroup>().blocksRaycasts = true;
+			archivesButtonsDisp.GetComponent<CanvasGroup>().alpha = 0;
+			archivesButtonsDisp.GetComponent<CanvasGroup>().blocksRaycasts = false;
+		}
 		
     }
 
@@ -212,21 +232,11 @@ public class DeskScript : MonoBehaviour
         else
         {
             Debug.Log("Inititate Judging");
-              
 		    judgingPanelDisp.GetComponent<CanvasGroup>().alpha = 1;
 		    judgingPanelDisp.GetComponent<CanvasGroup>().blocksRaycasts = true;
             isJudging = true;
         }
 		
-	}
-
-	public void AbortJudging()
-	{
-		Debug.Log("aborting");
-		judgingPanelDisp.GetComponent<CanvasGroup>().alpha = 0;
-		judgingPanelDisp.GetComponent<CanvasGroup>().blocksRaycasts = false;
-		initiateJudgingDisp.GetComponent<CanvasGroup>().alpha = 1;
-		initiateJudgingDisp.GetComponent<CanvasGroup>().blocksRaycasts = true;
 	}
 
 	public void Judging()
@@ -307,7 +317,7 @@ public class DeskScript : MonoBehaviour
         index = 0;
         archivesButtonsDisp.GetComponent<CanvasGroup>().alpha = 0;
         archivesButtonsDisp.GetComponent<CanvasGroup>().blocksRaycasts = false;
-        initiateJudgingDisp.GetComponent<CanvasGroup>().alpha = 0;
+		unlockArchives.GetComponent<CanvasGroup>().blocksRaycasts = false;
         initiateJudgingDisp.GetComponent<CanvasGroup>().blocksRaycasts = false;
 
         moneyDocsDisp.GetComponent<CanvasGroup>().alpha = 0;
