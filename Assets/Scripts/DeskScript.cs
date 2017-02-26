@@ -89,8 +89,8 @@ public class DeskScript : MonoBehaviour
 
 	public void ClickOnReport()
 	{
-		reportPanel.GetComponent<CanvasGroup>().alpha = 1;
-		reportPanel.GetComponent<CanvasGroup>().blocksRaycasts = true;
+		reportPanel.GetComponent<CanvasGroup>().alpha = 0;
+		reportPanel.GetComponent<CanvasGroup>().blocksRaycasts = false;
 		reportPanel.GetComponentInChildren<Text>().text = "Yesterday, your judging was x % accurate";
 	}
 

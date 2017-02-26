@@ -30,7 +30,7 @@ public class FillSheet : MonoBehaviour {
 		GameObject.Find("Divers").GetComponent<Text>().text = divers;
 		if (investigated == 3)
 		{
-			GameObject.Find("Religion").GetComponent<Text>().text = num;
+			GameObject.Find("Religion").GetComponent<Text>().text = religion;
 			GameObject.Find("Politique").GetComponent<Text>().text = politique;
 		}
 		else if(investigated == 10)
