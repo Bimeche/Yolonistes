@@ -52,7 +52,6 @@ public class Pause : MonoBehaviour {
     }
     public void ClickQuit()
     {
-        Debug.Log("Quit");
         Application.Quit();
     }
 

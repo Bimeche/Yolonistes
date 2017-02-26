@@ -43,7 +43,7 @@ Man
 3D printing
 Single, no kids
 Teaches salsa classes
-Suspiscions of immigration fraud
+Suspicions of immigration fraud
 !
 !
 !
@@ -65,7 +65,7 @@ Golf
 Frequent trips outside the country
 !
 2398
-154,678
+2,154,678
 !
 !
 Parking tickets (canceled)
@@ -177,7 +177,7 @@ Accountant
 Married twice, three kids
 Plays poker
 !
-123,543
+523,543
 9,213
 123
 !

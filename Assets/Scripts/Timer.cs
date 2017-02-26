@@ -74,8 +74,6 @@ public class Timer : MonoBehaviour {
             uh = uh - 10;
         }
 
-        Debug.Log(dh + uh + "   " + dm + um);
-
         applySprite(dh, hd);
         applySprite(uh, hu);
         applySprite(dm, md);
