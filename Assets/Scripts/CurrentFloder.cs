@@ -75,6 +75,7 @@ public class CurrentFloder : MonoBehaviour {
 
         index = Random.Range(1, Files.listCharacters.Count);
 
+        Debug.Log("day" + day);
         if (day >= 5 && numberFolder == 1)//si c'est le dernier jour et qu'il ne reste qu'un dossier, je tire le mien
         {
             index = 0;
