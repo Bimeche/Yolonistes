@@ -384,7 +384,29 @@ public class DeskScript : MonoBehaviour
         {
             currentF.day++;
             currentF.badDecisions = 0;
-            SceneManager.LoadScene("Morgane");
+            if(currentF.index == 0)
+            {
+                //fin 1: juge coupable et coupable ou innocent (lol tu meurs)
+                if(currentF.Files.listCharacters[currentF.index].outcome == 1)
+                {
+                    SceneManager.LoadScene("DeathEnding");
+                }
+                //fin 2: juge innocent et innocent
+                if(currentF.Files.listCharacters[currentF.index].outcome == 2 && currentF.Files.listCharacters[currentF.index].guilty == false)
+                {
+                    SceneManager.LoadScene("GoodGuyEnding");
+                }
+                //fin 3: juge innocent et coupable
+                if(currentF.Files.listCharacters[currentF.index].outcome == 2 && currentF.Files.listCharacters[currentF.index].guilty == true)
+                {
+                    SceneManager.LoadScene("ThatWasCloseEnding");
+                }
+            }
+            else
+            {
+                SceneManager.LoadScene("Morgane");
+            }
+
         }
         
     }

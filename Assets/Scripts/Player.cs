@@ -34,7 +34,7 @@ public class Player : MonoBehaviour
             animator.SetBool("isWalking", false);
         }
 
-        rbody.MovePosition(rbody.position + movement_vector * Time.deltaTime * 5);
+        rbody.MovePosition(rbody.position + movement_vector / 10);
 
         if (Input.GetKeyDown(KeyCode.A) )
         {
