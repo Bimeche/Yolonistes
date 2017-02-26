@@ -19,7 +19,6 @@ public class Player : MonoBehaviour
         animator = GetComponent<Animator>();
         rbody = GetComponent<Rigidbody2D>();
         sm = GameObject.Find("SoundManager").GetComponent<SoundManager>();
-        animator.SetFloat("input_y", -1);
         DontDestroyOnLoad(bgmusic);
     }
 
