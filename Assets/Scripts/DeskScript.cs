@@ -41,6 +41,7 @@ public class DeskScript : MonoBehaviour
 	public AudioSource financialSheet;
 	public AudioSource profileSheet;
 	public AudioSource phoneButtons;
+	public AudioSource errorPhone;
 	public AudioSource phonePickUp;
 	public AudioSource phonePutDown;
 	public AudioSource endOfFolder;
@@ -183,6 +184,7 @@ public class DeskScript : MonoBehaviour
 				archivesClosed.GetComponentInChildren<Text>().text = "No files found";
 				archivesClosed.GetComponent<CanvasGroup>().alpha = 1;
 				timeArchive = Time.time;
+				sm.PlaySingle(errorPhone.clip);
 			}
 			unlockArchives.GetComponent<CanvasGroup>().alpha = 1;
 			unlockArchives.GetComponent<CanvasGroup>().blocksRaycasts = true;
@@ -226,6 +228,8 @@ public class DeskScript : MonoBehaviour
 				archivesClosed.GetComponentInChildren<Text>().text = "No files found";
 				archivesClosed.GetComponent<CanvasGroup>().alpha = 1;
 				timeArchive = Time.time;
+				sm.PlaySingle(errorPhone.clip);
+				
 			}
 			unlockArchives.GetComponent<CanvasGroup>().alpha = 1;
 			unlockArchives.GetComponent<CanvasGroup>().blocksRaycasts = true;
@@ -270,6 +274,7 @@ public class DeskScript : MonoBehaviour
 				archivesClosed.GetComponentInChildren<Text>().text = "No files found";
 				archivesClosed.GetComponent<CanvasGroup>().alpha = 1;
 				timeArchive = Time.time;
+				sm.PlaySingle(errorPhone.clip);
 			}
 			unlockArchives.GetComponent<CanvasGroup>().alpha = 1;
 			unlockArchives.GetComponent<CanvasGroup>().blocksRaycasts = true;
