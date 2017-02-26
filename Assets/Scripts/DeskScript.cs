@@ -86,9 +86,9 @@ public class DeskScript : MonoBehaviour
 	// Update is called once per frame
 	void Update()
 	{
-		if(1 - (Time.time - timeArchive)>0 && timeArchive + 1 > Time.time)
+		if((1 - (Time.time - timeArchive)/2)>0 && timeArchive + 2 > Time.time)
 		{
-			archivesClosed.GetComponent<CanvasGroup>().alpha = 1-(Time.time - timeArchive);
+			archivesClosed.GetComponent<CanvasGroup>().alpha = 1-(Time.time - timeArchive)/2;
 				
 		}
 
