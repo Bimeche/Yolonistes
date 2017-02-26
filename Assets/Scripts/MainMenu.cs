@@ -17,7 +17,7 @@ public class MainMenu : MonoBehaviour {
 
     public void ClickPlay()
     {
-        SceneManager.LoadScene("Morgane");
+        SceneManager.LoadScene("Exposition");
     }
     public void ClickQuit()
     {

@@ -54,10 +54,12 @@ public class CurrentFloder : MonoBehaviour {
             badDecisions++;
             guiltScore++; 
         }
+        Debug.Log("count before remove" + Files.listCharacters.Count);
 
         if (Files.listCharacters[index].outcome != 3)
         {
             Files.listCharacters.RemoveAt(index);
+            Debug.Log("count after remove" + Files.listCharacters.Count);
         }
 
         index = Random.Range(1, Files.listCharacters.Count);
