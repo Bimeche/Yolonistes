@@ -41,7 +41,7 @@ public class ExpositionScript : MonoBehaviour {
                 break;
             case 3:
                 image.sprite = image3;
-                text.text = "You can look for more information in the archives, where you can access criminal records, financial reports and medical files. Consulting any of the three archives costs you time but could lead to a fairer decision.";
+                text.text = "You can look for more information in the archives, where you can access criminal records, financial reports and medical files. Consulting any of the three archives costs you time but could lead to a fairer decision. The archives close at 16:00 though.";
                 break;
             case 4:
                 image.sprite = image4;
