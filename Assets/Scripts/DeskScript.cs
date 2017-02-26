@@ -88,6 +88,7 @@ public class DeskScript : MonoBehaviour
 		    initiateJudgingDisp.GetComponent<CanvasGroup>().blocksRaycasts = true;
             hasAFolder = true;
 			fillSheet.FillMainSheet(currentF.GetCurrent().number, currentF.GetCurrent().age.ToString(), currentF.GetCurrent().genre, currentF.GetCurrent().emploi, currentF.GetCurrent().marital, currentF.GetCurrent().hobbies, currentF.GetCurrent().notable, currentF.GetCurrent().politique.religion, currentF.GetCurrent().politique.engagement, currentF.GetCurrent().statut);
+			GameObject.Find("Photo").GetComponent<Image>().CrossFadeAlpha(255, 0, true);
 			fillSheet.FillInfoSheets("MedicalArchives", "");
 			fillSheet.FillInfoSheets("CriminalArchives", "");
 			fillSheet.FillInfoSheets("FinancialArchives", "");
@@ -138,7 +139,8 @@ public class DeskScript : MonoBehaviour
                         b.gameObject.SetActive(true);
             }
             hasMed = true;
-            t.ChangeTime(2, 27);
+			if(medDocsDisp.GetComponentsInChildren<Button>().Length !=0)
+				t.ChangeTime(2, 27);
 			unlockArchives.GetComponent<CanvasGroup>().alpha = 1;
 			unlockArchives.GetComponent<CanvasGroup>().blocksRaycasts = true;
 			archivesButtonsDisp.GetComponent<CanvasGroup>().alpha = 0;
@@ -176,7 +178,8 @@ public class DeskScript : MonoBehaviour
                         b.gameObject.SetActive(true);
             }
             hasCrime = true;
-            t.ChangeTime(1, 42);
+			if (crimeDocsDisp.GetComponentsInChildren<Button>().Length != 0)
+				t.ChangeTime(1, 42);
 			unlockArchives.GetComponent<CanvasGroup>().alpha = 1;
 			unlockArchives.GetComponent<CanvasGroup>().blocksRaycasts = true;
 			archivesButtonsDisp.GetComponent<CanvasGroup>().alpha = 0;
@@ -214,7 +217,8 @@ public class DeskScript : MonoBehaviour
                         b.gameObject.SetActive(true);
             }
             hasFinance = true;
-            t.ChangeTime(3, 19);
+			if (moneyDocsDisp.GetComponentsInChildren<Button>().Length != 0)
+				t.ChangeTime(3, 19);
 			unlockArchives.GetComponent<CanvasGroup>().alpha = 1;
 			unlockArchives.GetComponent<CanvasGroup>().blocksRaycasts = true;
 			archivesButtonsDisp.GetComponent<CanvasGroup>().alpha = 0;
@@ -277,6 +281,7 @@ public class DeskScript : MonoBehaviour
 		currentDocDisplayed = profileDisp.GetComponent<CanvasGroup>();
 		profileDisp.sprite = AssetDatabase.LoadAssetAtPath<Sprite>("Assets/Sprites/Fiche_Base.png");
 		fillSheet.FillMainSheet(currentF.GetCurrent().number, currentF.GetCurrent().age.ToString(), currentF.GetCurrent().genre, currentF.GetCurrent().emploi, currentF.GetCurrent().marital, currentF.GetCurrent().hobbies, currentF.GetCurrent().notable, currentF.GetCurrent().politique.religion, currentF.GetCurrent().politique.engagement, currentF.GetCurrent().statut);
+		GameObject.Find("Photo").GetComponent<Image>().CrossFadeAlpha(255, 0, true);
 		fillSheet.FillInfoSheets("MedicalArchives", "");
 		fillSheet.FillInfoSheets("CriminalArchives", "");
 		fillSheet.FillInfoSheets("FinancialArchives", "");
@@ -293,6 +298,7 @@ public class DeskScript : MonoBehaviour
 		currentDocDisplayed.blocksRaycasts = false;
 		backToMainSheetPanel.GetComponent<CanvasGroup>().alpha = 1;
 		backToMainSheetPanel.GetComponent<CanvasGroup>().blocksRaycasts = true;
+		GameObject.Find("Photo").GetComponent<Image>().CrossFadeAlpha(0, 0, true);
 
 		if (buttonClicked.name == "MedPage1")
 		{
