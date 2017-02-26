@@ -8,6 +8,7 @@ public class InvestigationEndScript : MonoBehaviour {
 
 
     public Image image;
+    public Text text;
 
     public Sprite image1;
 
@@ -27,6 +28,7 @@ public class InvestigationEndScript : MonoBehaviour {
         {
             case 1:
                 image.sprite = image1;
+                text.text = "We have questions for you";
                 break;
             default:
                 break;
