@@ -19,7 +19,7 @@ public class Player : MonoBehaviour
         animator = GetComponent<Animator>();
         rbody = GetComponent<Rigidbody2D>();
         sm = GameObject.Find("SoundManager").GetComponent<SoundManager>();
-		DontDestroyOnLoad(bgmusic);
+        DontDestroyOnLoad(bgmusic);
     }
 
     private void Update()
@@ -36,8 +36,6 @@ public class Player : MonoBehaviour
             {
                  ti = Time.time;
                  sm.PlaySingle(musicSource.clip);
-                
-                
             }
         }
         else

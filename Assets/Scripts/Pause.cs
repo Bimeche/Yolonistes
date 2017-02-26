@@ -10,7 +10,7 @@ public class Pause : MonoBehaviour {
 	public Image blockingPanel;
     public Button play;
     public Button quit;
-	public AudioSource pauseMusic;
+	private AudioSource pauseMusic;
     private bool isPause = false;
 
     // Use this for initialization
@@ -21,6 +21,7 @@ public class Pause : MonoBehaviour {
         quit.gameObject.SetActive(false);
 
 		pauseMusic = GameObject.Find("backgroundMusic").GetComponent<AudioSource>();
+		
 
     }
 	
