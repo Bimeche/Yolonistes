@@ -18,6 +18,7 @@ public class DeskScript : MonoBehaviour
 	public Image initiateJudgingDisp;
 	public Image judgingPanelDisp;
 	public Image backToMainSheetPanel;
+	public Image reportPanel;
 	private CurrentFloder currentF;
 	private CanvasGroup currentDocDisplayed;
 	private int index;
@@ -28,6 +29,7 @@ public class DeskScript : MonoBehaviour
 	private bool hasMed = false;
 	private bool hasAFolder = false;
 	private List<Button> btList;
+	private int numberOfFolder;
     public Text nbFolderText;
     public double successRate;
 	public FillSheet fillSheet;
@@ -49,12 +51,16 @@ public class DeskScript : MonoBehaviour
 	{
         
         currentF = GameObject.Find("CurrentFolder").GetComponent<CurrentFloder>();
-        currentF.numberFolder = 2;
-        nbFolderText.text = currentF.numberFolder.ToString();
+        numberOfFolder = currentF.numberFolder;
+        nbFolderText.text = numberOfFolder.ToString();
 		sm = GameObject.Find("SoundManager").GetComponent<SoundManager>();
-        if (currentF.day > 1)
+		if (currentF.day > 1)
         {
-            successRate = (1.00 - (double)currentF.badDecisions / currentF.numberFolder) *100;
+            successRate = (1.00 - (double)currentF.badDecisions / numberOfFolder)*100;
+			currentF.badDecisions = 0;
+			reportPanel.GetComponentInChildren<Text>().text = reportPanel.GetComponentInChildren<Text>().text.Replace("x", successRate.ToString());
+			reportPanel.GetComponent<CanvasGroup>().alpha = 1;
+			reportPanel.GetComponent<CanvasGroup>().blocksRaycasts = true;
         }
 
         
@@ -81,12 +87,19 @@ public class DeskScript : MonoBehaviour
 	{
 	}
 
+	public void ClickOnReport()
+	{
+		reportPanel.GetComponent<CanvasGroup>().alpha = 0;
+		reportPanel.GetComponent<CanvasGroup>().blocksRaycasts = false;
+		reportPanel.GetComponentInChildren<Text>().text = "Yesterday, your judging was x % accurate";
+	}
+
 	public void ZoomIn()
 	{
         if (!hasAFolder)
         {
-            currentF.numberFolder--;
-            nbFolderText.text = currentF.numberFolder.ToString();
+            numberOfFolder--;
+            nbFolderText.text = numberOfFolder.ToString();
 		    profileDisp.GetComponent<CanvasGroup>().alpha = 1;
 		    profileDisp.GetComponent<CanvasGroup>().blocksRaycasts = true;
 		    currentDocDisplayed = profileDisp.GetComponent<CanvasGroup>();
@@ -94,7 +107,7 @@ public class DeskScript : MonoBehaviour
 		    initiateJudgingDisp.GetComponent<CanvasGroup>().alpha = 1;
 		    initiateJudgingDisp.GetComponent<CanvasGroup>().blocksRaycasts = true;
             hasAFolder = true;
-			fillSheet.FillMainSheet(currentF.GetCurrent().number, currentF.GetCurrent().age.ToString(), currentF.GetCurrent().genre, currentF.GetCurrent().emploi, currentF.GetCurrent().marital, currentF.GetCurrent().hobbies, currentF.GetCurrent().notable, currentF.GetCurrent().politique.religion, currentF.GetCurrent().politique.engagement, currentF.GetCurrent().statut);
+			fillSheet.FillMainSheet(currentF.GetCurrent().number, currentF.GetCurrent().age.ToString(), currentF.GetCurrent().genre, currentF.GetCurrent().emploi, currentF.GetCurrent().marital, currentF.GetCurrent().hobbies, currentF.GetCurrent().notable, currentF.GetCurrent().politique.religion, currentF.GetCurrent().politique.engagement, currentF.GetCurrent().outcome);
 			GameObject.Find("Photo").GetComponent<Image>().CrossFadeAlpha(255, 0, true);
 			fillSheet.FillInfoSheets("MedicalArchives", "");
 			fillSheet.FillInfoSheets("CriminalArchives", "");
@@ -259,14 +272,14 @@ public class DeskScript : MonoBehaviour
 
 		if(buttonClicked.name == "Innocent")
 		{
-            cleanFiles();
             currentF.GetCurrent().outcome = 2;
+			cleanFiles();
             
         }
 		else if(buttonClicked.name == "Investigate")
 		{
-            cleanFiles();
             currentF.GetCurrent().outcome = 3;
+            cleanFiles();
 		}
 		else
 		{
@@ -425,21 +438,16 @@ public class DeskScript : MonoBehaviour
             b.gameObject.SetActive(true);
         }
 
-        if (currentF.index != 0)
-        {
-            currentF.NextFile();
-        }
+        currentF.NextFile();
+		Debug.Log(currentF.badDecisions);
         t.ChangeTime(0, 27);
        
 
-        if (currentF.numberFolder == 0)
+        if (numberOfFolder == 0)
         {
-            Debug.Log("index dernier dossier" + currentF.index);
             currentF.day++;
-            currentF.badDecisions = 0;
             if(currentF.index == 0)
             {
-                Debug.Log("juge toi");
                 //fin 1: juge coupable et coupable ou innocent (lol tu meurs)
                 if(currentF.Files.listCharacters[currentF.index].outcome == 1)
                 {
@@ -458,7 +466,6 @@ public class DeskScript : MonoBehaviour
             }
             else
             {
-                Debug.Log("fail so load morgane");
                 SceneManager.LoadScene("Morgane");
             }
 

@@ -155,7 +155,7 @@ i
 29
 Man
 Firefighter
-Engaged, one kid on the way
+Engaged, spouse pregnant
 !
 !
 !
@@ -174,7 +174,7 @@ g
 51
 Man
 Accountant
-Married twice, three kids (all from first wife)
+Married twice, three kids
 Plays poker
 !
 123,543
@@ -250,7 +250,7 @@ i
 20
 Woman
 Farmer
-Married, one kid and another on the way
+Married, one kid, pregnant
 Painting
 Daughter of a government official convicted for tax evasion
 567 (remaining of a 34,670 loan for farming equipment)
@@ -307,7 +307,7 @@ g
 45
 Woman
 Government official
-Widowed eight times, no kids
+Widowed 8 times, no kids
 Fashion victim
 Inherited large sums of money from five of her husbands
 !
@@ -328,7 +328,7 @@ Woman
 Security guard
 Single, no kids
 Karaoke
-Nicknamed “the siren” because she sometimes sings on her rounds and have a nice voice
+Nicknamed “the siren” because she sometimes sings on her rounds
 2,867
 7,402
 971

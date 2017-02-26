@@ -73,7 +73,7 @@ public class ExpositionScript : MonoBehaviour {
         }
         else if(slide == slideMax)
         {
-            SceneManager.LoadScene("Morgane");
+            SceneManager.LoadScene("BeginMusicScene");
         }
     }
 }
