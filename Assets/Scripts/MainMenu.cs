@@ -21,8 +21,7 @@ public class MainMenu : MonoBehaviour {
     }
     public void ClickQuit()
     {
-
-        Debug.Log("Quit");
+	
         Application.Quit();
     }
 

@@ -51,12 +51,12 @@ public class DeskScript : MonoBehaviour
 	{
         
         currentF = GameObject.Find("CurrentFolder").GetComponent<CurrentFloder>();
-        currentF.numberFolder=2;
+        currentF.numberFolder=3;
         nbFolderText.text = currentF.numberFolder.ToString();
 		sm = GameObject.Find("SoundManager").GetComponent<SoundManager>();
 		if (currentF.day > 1)
         {
-            successRate = (1.00 - (double)currentF.badDecisions / currentF.numberFolder) *100;
+            successRate = System.Math.Round((1.00 - (double)currentF.badDecisions / currentF.numberFolder) *100,2);
 			currentF.badDecisions = 0;
 			reportPanel.GetComponentInChildren<Text>().text = reportPanel.GetComponentInChildren<Text>().text.Replace("x", successRate.ToString());
 			reportPanel.GetComponent<CanvasGroup>().alpha = 1;
@@ -175,7 +175,7 @@ public class DeskScript : MonoBehaviour
             }
             hasMed = true;
 			if(medDocsDisp.GetComponentsInChildren<Button>().Length !=0)
-				t.ChangeTime(2, 27);
+				t.ChangeTime(1, Random.Range(0, 59));
 			unlockArchives.GetComponent<CanvasGroup>().alpha = 1;
 			unlockArchives.GetComponent<CanvasGroup>().blocksRaycasts = true;
 			archivesButtonsDisp.GetComponent<CanvasGroup>().alpha = 0;
@@ -212,7 +212,7 @@ public class DeskScript : MonoBehaviour
             }
             hasCrime = true;
 			if (crimeDocsDisp.GetComponentsInChildren<Button>().Length != 0)
-				t.ChangeTime(1, 42);
+				t.ChangeTime(1, Random.Range(0, 59));
 			unlockArchives.GetComponent<CanvasGroup>().alpha = 1;
 			unlockArchives.GetComponent<CanvasGroup>().blocksRaycasts = true;
 			archivesButtonsDisp.GetComponent<CanvasGroup>().alpha = 0;
@@ -250,7 +250,7 @@ public class DeskScript : MonoBehaviour
             }
             hasFinance = true;
 			if (moneyDocsDisp.GetComponentsInChildren<Button>().Length != 0)
-				t.ChangeTime(3, 19);
+				t.ChangeTime(1, Random.Range(0, 59));
 			unlockArchives.GetComponent<CanvasGroup>().alpha = 1;
 			unlockArchives.GetComponent<CanvasGroup>().blocksRaycasts = true;
 			archivesButtonsDisp.GetComponent<CanvasGroup>().alpha = 0;
@@ -442,8 +442,6 @@ public class DeskScript : MonoBehaviour
         crimeDocsDisp.GetComponent<CanvasGroup>().blocksRaycasts = false;
         medDocsDisp.GetComponent<CanvasGroup>().alpha = 0;
         medDocsDisp.GetComponent<CanvasGroup>().blocksRaycasts = false;
-		//currentDocDisplayed.alpha = 1;
-		//currentDocDisplayed.blocksRaycasts = true;
 
 		sm.PlaySingle(endOfFolder.clip);
 
@@ -455,9 +453,10 @@ public class DeskScript : MonoBehaviour
         if (currentF.index != 0)
         {
             currentF.NextFile();
+
         }
         Debug.Log(currentF.badDecisions);
-        t.ChangeTime(0, 27);
+        t.ChangeTime(0, Random.Range(0, 59));
        
 
         if (currentF.numberFolder == 0)

@@ -8,7 +8,7 @@ public class CurrentFloder : MonoBehaviour {
     public GameObject g;
 
     public int badDecisions = 0;
-    public int numberFolder = 2;
+    public int numberFolder = 3;
     public int innocentVictims = 0;
     public int guiltScore = 0;
 
@@ -65,17 +65,14 @@ public class CurrentFloder : MonoBehaviour {
             badDecisions++;
             guiltScore++; 
         }
-        Debug.Log("count before remove" + Files.listCharacters.Count);
 
         if (Files.listCharacters[index].outcome != 3)
         {
             Files.listCharacters.RemoveAt(index);
-            Debug.Log("count after remove" + Files.listCharacters.Count);
         }
 
         index = Random.Range(1, Files.listCharacters.Count);
-
-        Debug.Log("day" + day);
+		
         if (day >= 5 && numberFolder == 1)//si c'est le dernier jour et qu'il ne reste qu'un dossier, je tire le mien
         {
             index = 0;
