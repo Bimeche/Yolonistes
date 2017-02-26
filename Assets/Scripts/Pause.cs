@@ -5,7 +5,7 @@ using UnityEngine.UI;
 
 public class Pause : MonoBehaviour {
 
-    public Text p;
+    public Image p;
     public Button play;
     public Button quit;
     private bool isPause = false;
@@ -52,7 +52,7 @@ public class Pause : MonoBehaviour {
         isPause = false;
         play.gameObject.SetActive(false);
         quit.gameObject.SetActive(false);
-        Debug.Log("Test");
+        Time.timeScale = 1;
     }
     public void ClickQuit()
     {
