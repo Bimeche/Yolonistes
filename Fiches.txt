@@ -82,7 +82,7 @@ Student
 Single, no kids
 Prom queen
 !
-! 
+!
 !
 !
 !
@@ -103,7 +103,7 @@ Single, no kids
 Missing at 16, never found before now
 !
 !
-! 
+!
 !
 !
 !
@@ -233,7 +233,7 @@ Man
 Government official
 Single, no kids
 Dungeon Master
-! 
+!
 7,890 (rare game books)
 7,892
 90
