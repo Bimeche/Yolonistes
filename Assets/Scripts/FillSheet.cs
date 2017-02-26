@@ -28,7 +28,7 @@ public class FillSheet : MonoBehaviour {
 		GameObject.Find("Statut").GetComponent<Text>().text = statut;
 		GameObject.Find("Hobbies").GetComponent<Text>().text = hobbies;
 		GameObject.Find("Divers").GetComponent<Text>().text = divers;
-		if (investigated == 2)
+		if (investigated == 3)
 		{
 			GameObject.Find("Religion").GetComponent<Text>().text = num;
 			GameObject.Find("Politique").GetComponent<Text>().text = politique;
