@@ -32,6 +32,18 @@ public class DeskScript : MonoBehaviour
     public Text nbFolderText;
     public double successRate;
 	public FillSheet fillSheet;
+	public AudioSource stampUp;
+	public AudioSource stampDown;
+	public AudioSource folderOpening;
+	public AudioSource medicalSheet;
+	public AudioSource criminalSheet;
+	public AudioSource financialSheet;
+	public AudioSource profileSheet;
+	public AudioSource phoneButtons;
+	public AudioSource phonePickUp;
+	public AudioSource phonePutDown;
+	public AudioSource endOfFolder;
+	private SoundManager sm;
     
     // Use this for initialization
     void Start()
@@ -40,8 +52,9 @@ public class DeskScript : MonoBehaviour
         currentF = GameObject.Find("CurrentFolder").GetComponent<CurrentFloder>();
         numberOfFolder = currentF.numberFolder;
         nbFolderText.text = numberOfFolder.ToString();
+		sm = GameObject.Find("SoundManager").GetComponent<SoundManager>();
 
-        if(currentF.day > 1)
+		if (currentF.day > 1)
         {
             successRate = (1.00 - (double)currentF.badDecisions / numberOfFolder)*100;
         }
@@ -88,6 +101,8 @@ public class DeskScript : MonoBehaviour
 			fillSheet.FillInfoSheets("MedicalArchives", "");
 			fillSheet.FillInfoSheets("CriminalArchives", "");
 			fillSheet.FillInfoSheets("FinancialArchives", "");
+			profileDisp.sprite = Resources.Load<Sprite>("Sprites/Fiche_Base");
+			sm.PlaySingle(folderOpening.clip);
 		}
 
 
@@ -105,6 +120,7 @@ public class DeskScript : MonoBehaviour
 		unlockArchives.GetComponent<CanvasGroup>().blocksRaycasts = false;
 		archivesButtonsDisp.GetComponent<CanvasGroup>().alpha = 1;
 		archivesButtonsDisp.GetComponent<CanvasGroup>().blocksRaycasts = true;
+		sm.PlaySingle(phonePickUp.clip);
 	}
 
 	public void MedDocs()
@@ -140,8 +156,7 @@ public class DeskScript : MonoBehaviour
 			archivesButtonsDisp.GetComponent<CanvasGroup>().alpha = 0;
 			archivesButtonsDisp.GetComponent<CanvasGroup>().blocksRaycasts = false;
 		}
-       
-        
+		sm.PlaySingle(phoneButtons.clip);
     }
 
 	public void CrimeDocs()
@@ -177,8 +192,9 @@ public class DeskScript : MonoBehaviour
 			archivesButtonsDisp.GetComponent<CanvasGroup>().alpha = 0;
 			archivesButtonsDisp.GetComponent<CanvasGroup>().blocksRaycasts = false;
 		}
-		
-    }
+		sm.PlaySingle(phoneButtons.clip);
+
+	}
 
 	public void MoneyDocs()
 	{
@@ -213,8 +229,9 @@ public class DeskScript : MonoBehaviour
 			archivesButtonsDisp.GetComponent<CanvasGroup>().alpha = 0;
 			archivesButtonsDisp.GetComponent<CanvasGroup>().blocksRaycasts = false;
 		}
-		
-    }
+		sm.PlaySingle(phoneButtons.clip);
+
+	}
 
 	public void InitiateJudging()
 	{
@@ -223,12 +240,14 @@ public class DeskScript : MonoBehaviour
             judgingPanelDisp.GetComponent<CanvasGroup>().alpha = 0;
             judgingPanelDisp.GetComponent<CanvasGroup>().blocksRaycasts = false;
             isJudging = false;
-        }
+			sm.PlaySingle(stampUp.clip);
+		}
         else
         {
 		    judgingPanelDisp.GetComponent<CanvasGroup>().alpha = 1;
 		    judgingPanelDisp.GetComponent<CanvasGroup>().blocksRaycasts = true;
             isJudging = true;
+			sm.PlaySingle(stampUp.clip);
         }
 		
 	}
@@ -253,6 +272,7 @@ public class DeskScript : MonoBehaviour
             currentF.GetCurrent().outcome = 1;
             cleanFiles();
 		}
+		sm.PlaySingle(stampDown.clip);
 	}
 
 	public void mainSheet()
@@ -268,6 +288,7 @@ public class DeskScript : MonoBehaviour
 		fillSheet.FillInfoSheets("MedicalArchives", "");
 		fillSheet.FillInfoSheets("CriminalArchives", "");
 		fillSheet.FillInfoSheets("FinancialArchives", "");
+		sm.PlaySingle(profileSheet.clip);
 	}
 
 	public void informationSheet()
@@ -289,6 +310,7 @@ public class DeskScript : MonoBehaviour
 			fillSheet.FillInfoSheets("CriminalArchives", "");
 			fillSheet.FillInfoSheets("FinancialArchives", "");
 			profileDisp.sprite = Resources.Load<Sprite>("Sprites/Fiche_Medicale");
+			sm.PlaySingle(medicalSheet.clip);
 		}
 		else if (buttonClicked.name == "MedPage2")
 		{
@@ -297,6 +319,7 @@ public class DeskScript : MonoBehaviour
 			fillSheet.FillInfoSheets("CriminalArchives", "");
 			fillSheet.FillInfoSheets("FinancialArchives", "");
 			profileDisp.sprite = Resources.Load<Sprite>("Sprites/Fiche_Medicale");
+			sm.PlaySingle(medicalSheet.clip);
 		}
 		else if (buttonClicked.name == "MedPage3")
 		{
@@ -305,6 +328,7 @@ public class DeskScript : MonoBehaviour
 			fillSheet.FillInfoSheets("CriminalArchives", "");
 			fillSheet.FillInfoSheets("FinancialArchives", "");
 			profileDisp.sprite = Resources.Load<Sprite>("Sprites/Fiche_Medicale");
+			sm.PlaySingle(medicalSheet.clip);
 		}
 		else if (buttonClicked.name == "CrimePage1")
 		{
@@ -313,6 +337,7 @@ public class DeskScript : MonoBehaviour
 			fillSheet.FillInfoSheets("MedicalArchives", "");
 			fillSheet.FillInfoSheets("FinancialArchives", "");
 			profileDisp.sprite = Resources.Load<Sprite>("Sprites/Fiche_Criminelle");
+			sm.PlaySingle(criminalSheet.clip);
 		}
 		else if (buttonClicked.name == "CrimePage2")
 		{
@@ -321,6 +346,7 @@ public class DeskScript : MonoBehaviour
 			fillSheet.FillInfoSheets("MedicalArchives", "");
 			fillSheet.FillInfoSheets("FinancialArchives", "");
 			profileDisp.sprite = Resources.Load<Sprite>("Sprites/Fiche_Criminelle");
+			sm.PlaySingle(criminalSheet.clip);
 		}
 		else if (buttonClicked.name == "CrimePage3")
 		{
@@ -329,6 +355,7 @@ public class DeskScript : MonoBehaviour
 			fillSheet.FillInfoSheets("MedicalArchives", "");
 			fillSheet.FillInfoSheets("FinancialArchives", "");
 			profileDisp.sprite = Resources.Load<Sprite>("Sprites/Fiche_Criminelle");
+			sm.PlaySingle(criminalSheet.clip);
 		}
 		else if (buttonClicked.name == "MoneyPage1")
 		{
@@ -337,6 +364,7 @@ public class DeskScript : MonoBehaviour
 			fillSheet.FillInfoSheets("MedicalArchives", "");
 			fillSheet.FillInfoSheets("CriminalArchives", "");
 			profileDisp.sprite = Resources.Load<Sprite>("Sprites/Fiche_Financesv2");
+			sm.PlaySingle(financialSheet.clip);
 		}
 		else if (buttonClicked.name == "MoneyPage2")
 		{
@@ -345,6 +373,7 @@ public class DeskScript : MonoBehaviour
 			fillSheet.FillInfoSheets("MedicalArchives", "");
 			fillSheet.FillInfoSheets("CriminalArchives", "");
 			profileDisp.sprite = Resources.Load<Sprite>("Sprites/Fiche_Financesv2");
+			sm.PlaySingle(financialSheet.clip);
 		}
 		else if (buttonClicked.name == "MoneyPage3")
 		{
@@ -353,6 +382,7 @@ public class DeskScript : MonoBehaviour
 			fillSheet.FillInfoSheets("MedicalArchives", "");
 			fillSheet.FillInfoSheets("CriminalArchives", "");
 			profileDisp.sprite = Resources.Load<Sprite>("Sprites/Fiche_Financesv2");
+			sm.PlaySingle(financialSheet.clip);
 		}
 	}
 
@@ -384,10 +414,12 @@ public class DeskScript : MonoBehaviour
         crimeDocsDisp.GetComponent<CanvasGroup>().blocksRaycasts = false;
         medDocsDisp.GetComponent<CanvasGroup>().alpha = 0;
         medDocsDisp.GetComponent<CanvasGroup>().blocksRaycasts = false;
-        //currentDocDisplayed.alpha = 1;
-        //currentDocDisplayed.blocksRaycasts = true;
+		//currentDocDisplayed.alpha = 1;
+		//currentDocDisplayed.blocksRaycasts = true;
 
-        foreach (Button b in btList)
+		sm.PlaySingle(endOfFolder.clip);
+
+		foreach (Button b in btList)
         {
             b.gameObject.SetActive(true);
         }
