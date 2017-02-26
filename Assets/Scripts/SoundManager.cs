@@ -41,7 +41,19 @@ public class SoundManager : MonoBehaviour {
 
     }
 
-        public void PlaySoundLoop(AudioClip audioClip)
+	//Used to play single sound clips delayed.
+	public void PlaySingleDelayed(AudioClip clip, float delay)
+	{
+
+		// Set the clip of our efxSource audio source to the clip passed in as a parameter.
+		efxSource.clip = clip;
+
+		//Play the clip.
+		efxSource.PlayDelayed(delay);
+
+	}
+
+	public void PlaySoundLoop(AudioClip audioClip)
         {
         
             musicSource.clip = audioClip;

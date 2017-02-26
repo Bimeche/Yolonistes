@@ -6,8 +6,10 @@ using UnityEngine.UI;
 public class Pause : MonoBehaviour {
 
     public Image p;
+	public Image blockingPanel;
     public Button play;
     public Button quit;
+	public AudioSource pauseMusic;
     private bool isPause = false;
 
     // Use this for initialization
@@ -17,6 +19,8 @@ public class Pause : MonoBehaviour {
         play.gameObject.SetActive (false);
         quit.gameObject.SetActive(false);
 
+		pauseMusic = GameObject.Find("backgroundMusic").GetComponent<AudioSource>();
+
     }
 	
 	// Update is called once per frame
@@ -25,34 +29,43 @@ public class Pause : MonoBehaviour {
         if (Input.GetKeyDown(KeyCode.P))
         {
             if (isPause)
-            {
-                p.gameObject.SetActive(false);
+			{
+				blockingPanel.GetComponent<CanvasGroup>().alpha = 0;
+				blockingPanel.GetComponent<CanvasGroup>().blocksRaycasts = false;
+				p.gameObject.SetActive(false);
                 play.gameObject.SetActive(false);
                 quit.gameObject.SetActive(false);
                 Time.timeScale = 1;
                 isPause = false;
-               
+				pauseMusic.Play();
                
             }
             else
-            {
-                p.gameObject.SetActive(true);
+			{
+				blockingPanel.GetComponent<CanvasGroup>().alpha = 1;
+				blockingPanel.GetComponent<CanvasGroup>().blocksRaycasts = true;
+				p.gameObject.SetActive(true);
                 play.gameObject.SetActive(true);
                 quit.gameObject.SetActive(true);
                 Time.timeScale = 0;
                 isPause = true;
+				pauseMusic.Pause();
+
             }
                
         }
     }
 
     public void ClickPlay()
-    {
-        p.gameObject.SetActive(false);
+	{
+		blockingPanel.GetComponent<CanvasGroup>().alpha = 0;
+		blockingPanel.GetComponent<CanvasGroup>().blocksRaycasts = false;
+		p.gameObject.SetActive(false);
         isPause = false;
         play.gameObject.SetActive(false);
         quit.gameObject.SetActive(false);
         Time.timeScale = 1;
+		pauseMusic.Play();
     }
     public void ClickQuit()
     {

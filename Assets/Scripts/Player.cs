@@ -8,7 +8,8 @@ public class Player : MonoBehaviour
 
     private Animator animator;                  //Used to store a reference to the Player's animator component.          
     private Rigidbody2D rbody;
-    public AudioSource musicSource;   
+    public AudioSource musicSource;
+	public AudioSource bgmusic;
     float ti=0;
     SoundManager sm;
     //Start overrides the Start function of MovingObject
@@ -18,6 +19,7 @@ public class Player : MonoBehaviour
         animator = GetComponent<Animator>();
         rbody = GetComponent<Rigidbody2D>();
         sm = GameObject.Find("SoundManager").GetComponent<SoundManager>();
+		DontDestroyOnLoad(bgmusic);
     }
 
     private void Update()

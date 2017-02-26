@@ -157,7 +157,8 @@ public class DeskScript : MonoBehaviour
 			archivesButtonsDisp.GetComponent<CanvasGroup>().blocksRaycasts = false;
 		}
 		sm.PlaySingle(phoneButtons.clip);
-    }
+		sm.PlaySingleDelayed(phonePutDown.clip,0.3f);
+	}
 
 	public void CrimeDocs()
 	{
@@ -193,6 +194,7 @@ public class DeskScript : MonoBehaviour
 			archivesButtonsDisp.GetComponent<CanvasGroup>().blocksRaycasts = false;
 		}
 		sm.PlaySingle(phoneButtons.clip);
+		sm.PlaySingleDelayed(phonePutDown.clip, 0.3f);
 
 	}
 
@@ -230,6 +232,7 @@ public class DeskScript : MonoBehaviour
 			archivesButtonsDisp.GetComponent<CanvasGroup>().blocksRaycasts = false;
 		}
 		sm.PlaySingle(phoneButtons.clip);
+		sm.PlaySingleDelayed(phonePutDown.clip, 0.3f);
 
 	}
 
