@@ -28,7 +28,6 @@ public class DeskScript : MonoBehaviour
 	private bool hasMed = false;
 	private bool hasAFolder = false;
 	private List<Button> btList;
-	private int numberOfFolder;
     public Text nbFolderText;
     public double successRate;
 	public FillSheet fillSheet;
@@ -50,13 +49,12 @@ public class DeskScript : MonoBehaviour
 	{
         
         currentF = GameObject.Find("CurrentFolder").GetComponent<CurrentFloder>();
-        numberOfFolder = currentF.numberFolder;
-        nbFolderText.text = numberOfFolder.ToString();
+        currentF.numberFolder = 2;
+        nbFolderText.text = currentF.numberFolder.ToString();
 		sm = GameObject.Find("SoundManager").GetComponent<SoundManager>();
-
-		if (currentF.day > 1)
+        if (currentF.day > 1)
         {
-            successRate = (1.00 - (double)currentF.badDecisions / numberOfFolder)*100;
+            successRate = (1.00 - (double)currentF.badDecisions / currentF.numberFolder) *100;
         }
 
         
@@ -87,8 +85,8 @@ public class DeskScript : MonoBehaviour
 	{
         if (!hasAFolder)
         {
-            numberOfFolder--;
-            nbFolderText.text = numberOfFolder.ToString();
+            currentF.numberFolder--;
+            nbFolderText.text = currentF.numberFolder.ToString();
 		    profileDisp.GetComponent<CanvasGroup>().alpha = 1;
 		    profileDisp.GetComponent<CanvasGroup>().blocksRaycasts = true;
 		    currentDocDisplayed = profileDisp.GetComponent<CanvasGroup>();
@@ -427,16 +425,21 @@ public class DeskScript : MonoBehaviour
             b.gameObject.SetActive(true);
         }
 
-        currentF.NextFile();
+        if (currentF.index != 0)
+        {
+            currentF.NextFile();
+        }
         t.ChangeTime(0, 27);
        
 
-        if (numberOfFolder == 0)
+        if (currentF.numberFolder == 0)
         {
+            Debug.Log("index dernier dossier" + currentF.index);
             currentF.day++;
             currentF.badDecisions = 0;
             if(currentF.index == 0)
             {
+                Debug.Log("juge toi");
                 //fin 1: juge coupable et coupable ou innocent (lol tu meurs)
                 if(currentF.Files.listCharacters[currentF.index].outcome == 1)
                 {
@@ -455,6 +458,7 @@ public class DeskScript : MonoBehaviour
             }
             else
             {
+                Debug.Log("fail so load morgane");
                 SceneManager.LoadScene("Morgane");
             }
 
