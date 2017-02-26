@@ -25,7 +25,7 @@ public class Credits : MonoBehaviour {
         t2.text = "";
         t3.text = "";
 
-        texte.text = "Game Sprites adapted from: \n Pokemon HeartGold SoulSilver – DS, Pokemon Diamond Pearl – DS, Stardew Valley – PC, Army Men Advance – GBA, Papers, Please – PC, noirlac.tumblr.com \nMusic: \nTaylor Davis -Sadness and sorrow, Ofelia’s Dream";
+        texte.text = "Game Sprites adapted from: \n Pokemon HeartGold SoulSilver – DS, Pokemon Diamond Pearl – DS, Stardew Valley – PC, Army Men Advance – GBA, Papers, Please – PC, noirlac.tumblr.com \nMusic: \nTaylor Davis -Sadness and Sorrow, Ofelia’s Dream. \nSounds from freesound.com and Papers, Please.";
     }
 
     public void ClickBack()
