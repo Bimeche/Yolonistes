@@ -9,7 +9,6 @@ public class Player : MonoBehaviour
     private Animator animator;                  //Used to store a reference to the Player's animator component.          
     private Rigidbody2D rbody;
     public AudioSource musicSource;   
-    public Timer t;
     float ti=0;
     SoundManager sm;
     //Start overrides the Start function of MovingObject

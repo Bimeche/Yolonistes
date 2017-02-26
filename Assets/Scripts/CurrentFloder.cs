@@ -33,7 +33,6 @@ public class CurrentFloder : MonoBehaviour {
         if(fileInitialized == false)
         {
             index = Random.Range(1, Files.listCharacters.Count);
-            Debug.Log("index start:" + index + "count" + Files.listCharacters.Count);
             fileInitialized = true;
         }
     }
@@ -62,7 +61,6 @@ public class CurrentFloder : MonoBehaviour {
         }
 
         index = Random.Range(1, Files.listCharacters.Count);
-        Debug.Log("Count " + Files.listCharacters.Count + " index " + index);
 
         if (day >= 5 && numberFolder == 1)//si c'est le dernier jour et qu'il ne reste qu'un dossier, je tire le mien
         {

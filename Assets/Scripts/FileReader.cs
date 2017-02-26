@@ -13,7 +13,7 @@ public class FileReader : MonoBehaviour {
   
     void Start()
     {
-        theSourceFile = new FileInfo("Fiches.txt");
+        theSourceFile = new FileInfo("Assets/Fiches.txt");
         reader = theSourceFile.OpenText();
 
         text = reader.ReadLine();
@@ -24,7 +24,6 @@ public class FileReader : MonoBehaviour {
             text = reader.ReadLine();
         }
         
-        Debug.Log(listCharacters.Count);
         
     }
 

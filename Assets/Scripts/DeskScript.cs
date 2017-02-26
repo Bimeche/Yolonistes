@@ -1,6 +1,5 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEditor;
+﻿using System.Collections.Generic;
+//using UnityEditor;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
@@ -37,7 +36,6 @@ public class DeskScript : MonoBehaviour
     // Use this for initialization
     void Start()
 	{
-        Debug.Log("start" + gameObject.name);
         
         currentF = GameObject.Find("CurrentFolder").GetComponent<CurrentFloder>();
         numberOfFolder = currentF.numberFolder;
@@ -46,7 +44,6 @@ public class DeskScript : MonoBehaviour
         if(currentF.day > 1)
         {
             successRate = (1.00 - (double)currentF.badDecisions / numberOfFolder)*100;
-            Debug.Log("success : " + successRate + "%");
         }
 
         
@@ -79,7 +76,6 @@ public class DeskScript : MonoBehaviour
         {
             numberOfFolder--;
             nbFolderText.text = numberOfFolder.ToString();
-            Debug.Log("button pressed");
 		    profileDisp.GetComponent<CanvasGroup>().alpha = 1;
 		    profileDisp.GetComponent<CanvasGroup>().blocksRaycasts = true;
 		    currentDocDisplayed = profileDisp.GetComponent<CanvasGroup>();
@@ -116,12 +112,10 @@ public class DeskScript : MonoBehaviour
 
         if (!hasMed)
         {
-            Debug.Log("MedDocs");
 		    medDocsDisp.GetComponent<CanvasGroup>().alpha = 1;
 		    medDocsDisp.GetComponent<CanvasGroup>().blocksRaycasts = true;
             foreach (Button b in medDocsDisp.GetComponentsInChildren<Button>())
             {
-                Debug.Log(b.name);
                 if (b.name=="MedPage1")
                     if(currentF.GetCurrent().medical.psychologique.Equals(""))
                         b.gameObject.SetActive ( false);
@@ -154,13 +148,11 @@ public class DeskScript : MonoBehaviour
 	{
         if (!hasCrime)
         {
-            Debug.Log("CrimeDocs");
 		    crimeDocsDisp.GetComponent<CanvasGroup>().alpha = 1;
 		    crimeDocsDisp.GetComponent<CanvasGroup>().blocksRaycasts = true;
 
             foreach (Button b in crimeDocsDisp.GetComponentsInChildren<Button>())
             {
-                Debug.Log(b.name);
                 if (b.name == "CrimePage1")
                     if (currentF.GetCurrent().crime.atteintePersonnelle.Equals(""))
                         b.gameObject.SetActive(false);
@@ -192,13 +184,10 @@ public class DeskScript : MonoBehaviour
 	{
         if (!hasFinance)
         {
-            Debug.Log("MoneyDocs");
 		    moneyDocsDisp.GetComponent<CanvasGroup>().alpha = 1;
 		    moneyDocsDisp.GetComponent<CanvasGroup>().blocksRaycasts = true;
-            Debug.Log(moneyDocsDisp.GetComponentsInChildren<Button>().Length);
             foreach (Button b in moneyDocsDisp.GetComponentsInChildren<Button>())
             {
-                Debug.Log(b.name);
                 if (b.name == "MoneyPage1")
                     if (currentF.GetCurrent().finance.dette.Equals(""))
                         b.gameObject.SetActive(false);
@@ -231,14 +220,12 @@ public class DeskScript : MonoBehaviour
 	{
         if (isJudging)
         {
-            Debug.Log("aborting");
             judgingPanelDisp.GetComponent<CanvasGroup>().alpha = 0;
             judgingPanelDisp.GetComponent<CanvasGroup>().blocksRaycasts = false;
             isJudging = false;
         }
         else
         {
-            Debug.Log("Inititate Judging");
 		    judgingPanelDisp.GetComponent<CanvasGroup>().alpha = 1;
 		    judgingPanelDisp.GetComponent<CanvasGroup>().blocksRaycasts = true;
             isJudging = true;
@@ -254,32 +241,28 @@ public class DeskScript : MonoBehaviour
 		{
             cleanFiles();
             currentF.GetCurrent().outcome = 2;
-            Debug.Log("Innocent");
             
         }
 		else if(buttonClicked.name == "Investigate")
 		{
             cleanFiles();
             currentF.GetCurrent().outcome = 3;
-            Debug.Log("Investigate");
 		}
 		else
 		{
             currentF.GetCurrent().outcome = 1;
             cleanFiles();
-            Debug.Log("Guilty");
 		}
 	}
 
 	public void mainSheet()
 	{
-		Debug.Log("Main Sheet");
 		currentDocDisplayed.alpha = 1;
 		currentDocDisplayed.blocksRaycasts = true;
 		backToMainSheetPanel.GetComponent<CanvasGroup>().alpha = 0;
 		backToMainSheetPanel.GetComponent<CanvasGroup>().blocksRaycasts = false;
 		currentDocDisplayed = profileDisp.GetComponent<CanvasGroup>();
-		profileDisp.sprite = AssetDatabase.LoadAssetAtPath<Sprite>("Assets/Sprites/Fiche_Base.png");
+		profileDisp.sprite = Resources.Load<Sprite>("Sprites/Fiche_Base");
 		fillSheet.FillMainSheet(currentF.GetCurrent().number, currentF.GetCurrent().age.ToString(), currentF.GetCurrent().genre, currentF.GetCurrent().emploi, currentF.GetCurrent().marital, currentF.GetCurrent().hobbies, currentF.GetCurrent().notable, currentF.GetCurrent().politique.religion, currentF.GetCurrent().politique.engagement, currentF.GetCurrent().statut);
 		GameObject.Find("Photo").GetComponent<Image>().CrossFadeAlpha(255, 0, true);
 		fillSheet.FillInfoSheets("MedicalArchives", "");
@@ -290,7 +273,6 @@ public class DeskScript : MonoBehaviour
 	public void informationSheet()
 	{
 		GameObject buttonClicked = EventSystem.current.currentSelectedGameObject;
-		Debug.Log(buttonClicked.name);
 		currentDocDisplayed.alpha = 1;
 		currentDocDisplayed.blocksRaycasts = true;
 		currentDocDisplayed = buttonClicked.GetComponent<CanvasGroup>();
@@ -306,7 +288,7 @@ public class DeskScript : MonoBehaviour
 			fillSheet.FillMainSheet("","","","","","","","","",10);
 			fillSheet.FillInfoSheets("CriminalArchives", "");
 			fillSheet.FillInfoSheets("FinancialArchives", "");
-			profileDisp.sprite = AssetDatabase.LoadAssetAtPath<Sprite>("Assets/Sprites/Fiche_Medicale.png");
+			profileDisp.sprite = Resources.Load<Sprite>("Sprites/Fiche_Medicale");
 		}
 		else if (buttonClicked.name == "MedPage2")
 		{
@@ -314,7 +296,7 @@ public class DeskScript : MonoBehaviour
 			fillSheet.FillMainSheet("", "", "", "", "", "", "", "", "", 10);
 			fillSheet.FillInfoSheets("CriminalArchives", "");
 			fillSheet.FillInfoSheets("FinancialArchives", "");
-			profileDisp.sprite = AssetDatabase.LoadAssetAtPath<Sprite>("Assets/Sprites/Fiche_Medicale.png");
+			profileDisp.sprite = Resources.Load<Sprite>("Sprites/Fiche_Medicale");
 		}
 		else if (buttonClicked.name == "MedPage3")
 		{
@@ -322,7 +304,7 @@ public class DeskScript : MonoBehaviour
 			fillSheet.FillMainSheet("", "", "", "", "", "", "", "", "", 10);
 			fillSheet.FillInfoSheets("CriminalArchives", "");
 			fillSheet.FillInfoSheets("FinancialArchives", "");
-			profileDisp.sprite = AssetDatabase.LoadAssetAtPath<Sprite>("Assets/Sprites/Fiche_Medicale.png");
+			profileDisp.sprite = Resources.Load<Sprite>("Sprites/Fiche_Medicale");
 		}
 		else if (buttonClicked.name == "CrimePage1")
 		{
@@ -330,7 +312,7 @@ public class DeskScript : MonoBehaviour
 			fillSheet.FillMainSheet("", "", "", "", "", "", "", "", "", 10);
 			fillSheet.FillInfoSheets("MedicalArchives", "");
 			fillSheet.FillInfoSheets("FinancialArchives", "");
-			profileDisp.sprite = AssetDatabase.LoadAssetAtPath<Sprite>("Assets/Sprites/Fiche_Criminelle.png");
+			profileDisp.sprite = Resources.Load<Sprite>("Sprites/Fiche_Criminelle");
 		}
 		else if (buttonClicked.name == "CrimePage2")
 		{
@@ -338,7 +320,7 @@ public class DeskScript : MonoBehaviour
 			fillSheet.FillMainSheet("", "", "", "", "", "", "", "", "", 10);
 			fillSheet.FillInfoSheets("MedicalArchives", "");
 			fillSheet.FillInfoSheets("FinancialArchives", "");
-			profileDisp.sprite = AssetDatabase.LoadAssetAtPath<Sprite>("Assets/Sprites/Fiche_Criminelle.png");
+			profileDisp.sprite = Resources.Load<Sprite>("Sprites/Fiche_Criminelle");
 		}
 		else if (buttonClicked.name == "CrimePage3")
 		{
@@ -346,31 +328,31 @@ public class DeskScript : MonoBehaviour
 			fillSheet.FillMainSheet("", "", "", "", "", "", "", "", "", 10);
 			fillSheet.FillInfoSheets("MedicalArchives", "");
 			fillSheet.FillInfoSheets("FinancialArchives", "");
-			profileDisp.sprite = AssetDatabase.LoadAssetAtPath<Sprite>("Assets/Sprites/Fiche_Criminelle.png");
+			profileDisp.sprite = Resources.Load<Sprite>("Sprites/Fiche_Criminelle");
 		}
 		else if (buttonClicked.name == "MoneyPage1")
 		{
-			fillSheet.FillInfoSheets("FinancialArchives", currentF.GetCurrent().finance.dette);
+			fillSheet.FillInfoSheets("FinancialArchives1", currentF.GetCurrent().finance.dette);
 			fillSheet.FillMainSheet("", "", "", "", "", "", "", "", "", 10);
 			fillSheet.FillInfoSheets("MedicalArchives", "");
 			fillSheet.FillInfoSheets("CriminalArchives", "");
-			profileDisp.sprite = AssetDatabase.LoadAssetAtPath<Sprite>("Assets/Sprites/Fiche_Investigation_2.png");
+			profileDisp.sprite = Resources.Load<Sprite>("Sprites/Fiche_Financesv2");
 		}
 		else if (buttonClicked.name == "MoneyPage2")
 		{
-			fillSheet.FillInfoSheets("FinancialArchives", currentF.GetCurrent().finance.impots);
+			fillSheet.FillInfoSheets("FinancialArchives2", currentF.GetCurrent().finance.impots);
 			fillSheet.FillMainSheet("", "", "", "", "", "", "", "", "", 10);
 			fillSheet.FillInfoSheets("MedicalArchives", "");
 			fillSheet.FillInfoSheets("CriminalArchives", "");
-			profileDisp.sprite = AssetDatabase.LoadAssetAtPath<Sprite>("Assets/Sprites/Fiche_Investigation_2.png");
+			profileDisp.sprite = Resources.Load<Sprite>("Sprites/Fiche_Financesv2");
 		}
 		else if (buttonClicked.name == "MoneyPage3")
 		{
-			fillSheet.FillInfoSheets("FinancialArchives", currentF.GetCurrent().finance.solde);
+			fillSheet.FillInfoSheets("FinancialArchives3", currentF.GetCurrent().finance.solde);
 			fillSheet.FillMainSheet("", "", "", "", "", "", "", "", "", 10);
 			fillSheet.FillInfoSheets("MedicalArchives", "");
 			fillSheet.FillInfoSheets("CriminalArchives", "");
-			profileDisp.sprite = AssetDatabase.LoadAssetAtPath<Sprite>("Assets/Sprites/Fiche_Investigation_2.png");
+			profileDisp.sprite = Resources.Load<Sprite>("Sprites/Fiche_Financesv2");
 		}
 	}
 

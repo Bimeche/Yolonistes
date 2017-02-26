@@ -1,8 +1,6 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.UI;
-using UnityEditor;
+//using UnityEditor;
 
 public class FillSheet : MonoBehaviour {
 
@@ -21,10 +19,10 @@ public class FillSheet : MonoBehaviour {
 		GameObject.Find("Numero").GetComponent<Text>().text = num;
 		GameObject.Find("Age").GetComponent<Text>().text = age;
 		GameObject.Find("Sexe").GetComponent<Text>().text = sexe;
-		if(sexe == "Woman")
-			GameObject.Find("Photo").GetComponent<Image>().sprite= AssetDatabase.LoadAssetAtPath<Sprite>("Assets/Sprites/Portrait_2.png");
+		if (sexe == "Woman")
+			GameObject.Find("Photo").GetComponent<Image>().sprite = Resources.Load<Sprite>("Sprites/Portrait_2");
 		else
-			GameObject.Find("Photo").GetComponent<Image>().sprite = AssetDatabase.LoadAssetAtPath<Sprite>("Assets/Sprites/Portrait_1.png");
+			GameObject.Find("Photo").GetComponent<Image>().sprite = Resources.Load<Sprite>("Sprites/Portrait_1");
 
 		GameObject.Find("Emploi").GetComponent<Text>().text = emploi;
 		GameObject.Find("Statut").GetComponent<Text>().text = statut;
@@ -49,6 +47,32 @@ public class FillSheet : MonoBehaviour {
 
 	public void FillInfoSheets(string archiveName, string info)
 	{
-		GameObject.Find(archiveName).GetComponent<Text>().text = info;
+		if(info == "")
+			GameObject.Find(archiveName).GetComponent<Text>().text = "";
+		else
+		{
+			if (archiveName == "MedicalArchives")
+			{
+				GameObject.Find(archiveName).GetComponent<Text>().text = "Illness/Handicap : \n";
+				GameObject.Find(archiveName).GetComponent<Text>().text += info;
+			}
+			else if(archiveName == "CriminalArchives")
+			{
+				GameObject.Find(archiveName).GetComponent<Text>().text = "Infraction : \n";
+				GameObject.Find(archiveName).GetComponent<Text>().text += info;
+			}
+			else
+			{
+				string name = archiveName.Substring(0, archiveName.Length - 1);
+				if(archiveName == "FinancialArchives1")
+					GameObject.Find(name).GetComponent<Text>().text = "Debts to pay : \n";
+				if (archiveName == "FinancialArchives2")
+					GameObject.Find(name).GetComponent<Text>().text = "Tax to pay : \n";
+				if (archiveName == "FinancialArchives3")
+					GameObject.Find(name).GetComponent<Text>().text = "Account balance : \n";
+
+				GameObject.Find(name).GetComponent<Text>().text += info;
+			}
+		}
 	}
 }
