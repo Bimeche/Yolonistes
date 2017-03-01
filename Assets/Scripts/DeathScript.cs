@@ -46,7 +46,11 @@ public class DeathScript : MonoBehaviour {
         }
         else if (slide == slideMax)
         {
-            SceneManager.LoadScene("MainMenu");
+			Destroy(GameObject.Find("CurrentFolder").GetComponent<CurrentFloder>().gameObject);
+			Destroy(GameObject.Find("FileReader").GetComponent<FileReader>().gameObject);
+			Destroy(GameObject.Find("SoundManager").GetComponent<SoundManager>().gameObject);
+			Destroy(GameObject.Find("backgroundMusic"));
+			SceneManager.LoadScene("MainMenu");
         }
     }
 }

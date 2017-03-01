@@ -13,7 +13,7 @@ public class FileReader : MonoBehaviour {
   
     void Start()
     {
-        theSourceFile = new FileInfo("Assets/Fiches.txt");
+        theSourceFile = new FileInfo("Fiches.txt");
         reader = theSourceFile.OpenText();
 
         text = reader.ReadLine();

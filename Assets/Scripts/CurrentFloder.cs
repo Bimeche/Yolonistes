@@ -77,10 +77,15 @@ public class CurrentFloder : MonoBehaviour {
         {
             index = 0;
             //determine si joueur coupable
-            if(innocentVictims > 0)
+			if(innocentVictims == 0)
+			{
+				Files.listCharacters[index].guilty = false;
+				Files.listCharacters[index].crime.atteintePersonnelle = "Criminal record erased due to good conduct";
+			}
+            else if(innocentVictims > 0)
             {
                 Files.listCharacters[index].guilty = true;
-                Files.listCharacters[index].crime.atteintePersonnelle = innocentVictims + " victimes.";
+                Files.listCharacters[index].crime.atteintePersonnelle = innocentVictims + " victims.";
             }
             else if(guiltScore > 4)
             {
